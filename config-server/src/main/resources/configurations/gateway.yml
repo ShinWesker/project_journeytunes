@@ -42,3 +42,7 @@ spring:
           uri: http://localhost:5000
           predicates:
             - Path=/emails/api/v1/**
+        - id: routes
+          uri: http://localhost:4000
+          predicates:
+            - Path=/routes/api/v1/**
