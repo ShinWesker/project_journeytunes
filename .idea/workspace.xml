@@ -6,14 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="4afe9e2b-85e2-42cb-8a1c-7b59021895c2" name="Changes" comment="setup v1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/email/src/main/java/dhbw/mosbach/email/controller/EmailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/email/src/main/java/dhbw/mosbach/email/controller/EmailController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trip/src/main/java/dhbw/mosbach/trip/AuthorizationUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/trip/src/main/java/dhbw/mosbach/trip/TripApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/trip/src/main/java/dhbw/mosbach/trip/TripApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trip/src/main/java/dhbw/mosbach/trip/clients/HotelClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/trip/src/main/java/dhbw/mosbach/trip/clients/HotelClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trip/src/main/java/dhbw/mosbach/trip/clients/UserClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/trip/src/main/java/dhbw/mosbach/trip/clients/UserClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trip/src/main/java/dhbw/mosbach/trip/controller/TripController.java" beforeDir="false" afterPath="$PROJECT_DIR$/trip/src/main/java/dhbw/mosbach/trip/controller/TripController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trip/src/main/java/dhbw/mosbach/trip/models/Trip.java" beforeDir="false" afterPath="$PROJECT_DIR$/trip/src/main/java/dhbw/mosbach/trip/models/Trip.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trip/src/main/java/dhbw/mosbach/trip/requestclasses/CreateTrip.java" beforeDir="false" afterPath="$PROJECT_DIR$/trip/src/main/java/dhbw/mosbach/trip/dtos/CreateTrip.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/src/main/java/dhbw/mosbach/user/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/user/src/main/java/dhbw/mosbach/user/controllers/UserController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -215,7 +209,7 @@
       <workItem from="1709252288654" duration="5629000" />
       <workItem from="1709284000263" duration="1041000" />
       <workItem from="1709285063485" duration="8472000" />
-      <workItem from="1709296121084" duration="2626000" />
+      <workItem from="1709296121084" duration="3407000" />
     </task>
     <task id="LOCAL-00001" summary="setup v1">
       <option name="closed" value="true" />

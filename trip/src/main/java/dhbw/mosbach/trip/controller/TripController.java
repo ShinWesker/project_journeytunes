@@ -36,10 +36,10 @@ public class TripController {
         return new ResponseEntity<>(trip, HttpStatus.CREATED);
     }
 
-    @GetMapping("/journeys/{id}")
-    public ResponseEntity<Object> getTrip(@PathVariable long id) {
-
-        User user = userClient.getUserById(id).getBody();
+    @GetMapping("/journeys")
+    public ResponseEntity<Object> getTrip(@RequestHeader("Authorization") String authorization) {
+        String tokenValue = extractTokenValue(authorization);
+        User user = userClient.getUser(new RequestToken(tokenValue)).getBody();
         if (user == null)
             return new ResponseEntity<>("User could not be found!", HttpStatus.NOT_FOUND);
 
@@ -52,6 +52,10 @@ public class TripController {
             outTrips.add(new FullTrip(hotel, trip.getPlaylistLink(), new Route(trip.getStartLat(), trip.getStartLng(), trip.getEndLat(), trip.getEndLng())));
         }
         return new ResponseEntity<>(outTrips, HttpStatus.OK);
+    }
+
+    private String extractTokenValue(String authorizationHeader) {
+        return authorizationHeader.split(" ")[1];
     }
 
 }
