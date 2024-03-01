@@ -1,0 +1,27 @@
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+server:
+  port: 9000
+
+spring:
+  application:
+    name: users
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/journeytunes_db
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: mysql
+
+config:
+  HOST_SYSTEM_IP_ADDRESS: localhost
+  EMAIL_SERVICE_PORT: 5870
+  USER_SERVICE_PORT: 8222

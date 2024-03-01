@@ -1,0 +1,44 @@
+eureka:
+  client:
+    register-with-eureka: false
+server:
+  port: 8222
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+            allowedHeaders: "*"
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: hotels
+          uri : http://localhost:7000
+          predicates:
+            - Path=/hotels/api/v1/**
+        - id: trips
+          uri: http://localhost:8000
+          predicates:
+            - Path=/trips/api/v1/**
+        - id: users
+          uri: http://localhost:9000
+          predicates:
+            - Path=/users/api/v1/**
+        - id: spotify
+          uri: http://localhost:6000
+          predicates:
+            - Path=/spotify/api/v1/**
+        - id: email
+          uri: http://localhost:5000
+          predicates:
+            - Path=/emails/api/v1/**
