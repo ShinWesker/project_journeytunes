@@ -1,9 +1,13 @@
-version: '3'
+version: '3.0'
 services:
   config-server:
     build:
       context: ./config-server
       dockerfile: Dockerfile
+    deploy:
+      resources:
+        limits:
+          memory: 300M
 
   mysql-db:
     image: mysql:latest
@@ -16,16 +20,22 @@ services:
       - "3306:3306"
     volumes:
       - mysql-db:/var/lib/mysql
+    deploy:
+      resources:
+        limits:
+          memory: 300M
 
   phpmyadmin-db:
     image: phpmyadmin:latest
-    links:
-      - mysql-db
     environment:
       PMA_HOST: mysql-db
       PMA_PORT: 3306
     ports:
       - "5050:80"
+    deploy:
+      resources:
+        limits:
+          memory: 300M
 
   discovery:
     build:
@@ -35,6 +45,10 @@ services:
       - config-server
     ports:
       - "8761:8761"
+    deploy:
+      resources:
+        limits:
+          memory: 300M
 
   gateway:
     build:
@@ -47,6 +61,10 @@ services:
       - phpmyadmin-db
     ports:
       - "8222:8222"
+    deploy:
+      resources:
+        limits:
+          memory: 300M
 
   spotify:
     build:
@@ -56,6 +74,10 @@ services:
       - config-server
       - discovery
       - gateway
+    deploy:
+      resources:
+        limits:
+          memory: 300M
 
   users:
     build:
@@ -66,8 +88,12 @@ services:
       - discovery
       - mysql-db
       - gateway
+    deploy:
+      resources:
+        limits:
+          memory: 300M
 
-  email:
+  emails:
     build:
       context: ./email
       dockerfile: Dockerfile
@@ -76,8 +102,12 @@ services:
       - discovery
       - mysql-db
       - gateway
+    deploy:
+      resources:
+        limits:
+          memory: 300M
 
-  hotel:
+  hotels:
     build:
       context: ./hotel
       dockerfile: Dockerfile
@@ -86,6 +116,10 @@ services:
       - discovery
       - mysql-db
       - gateway
+    deploy:
+      resources:
+        limits:
+          memory: 300M
 
   routes:
     build:
@@ -96,8 +130,12 @@ services:
       - discovery
       - mysql-db
       - gateway
+    deploy:
+      resources:
+        limits:
+          memory: 300M
 
-  trip:
+  trips:
     build:
       context: ./trip
       dockerfile: Dockerfile
@@ -106,6 +144,10 @@ services:
       - discovery
       - mysql-db
       - gateway
+    deploy:
+      resources:
+        limits:
+          memory: 300M
 
   frontend:
     build:
