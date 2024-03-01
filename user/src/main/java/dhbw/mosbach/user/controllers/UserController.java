@@ -8,6 +8,7 @@ import dhbw.mosbach.user.models.User;
 import dhbw.mosbach.user.requestclasses.*;
 import dhbw.mosbach.user.services.TokenService;
 import dhbw.mosbach.user.services.UserService;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Objects;
 
 @RestController
-@RequiredArgsConstructor
+@AllArgsConstructor
 @RequestMapping("/users/api/v1")
 public class UserController {
 
@@ -108,7 +109,7 @@ public class UserController {
         return ResponseEntity.ok(new GetUser(user.getId(), user.getName(), user.getEmail()));
     }
 
-    @PostMapping("/user/{id}")
+    @GetMapping("/user/{id}")
     public ResponseEntity<GetUser> getUserById(@PathVariable long id) {
         User user = userService.getUserById(id);
         if (user == null) {

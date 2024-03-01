@@ -3,7 +3,7 @@ eureka:
     serviceUrl:
       defaultZone: http://discovery:8761/eureka/
   instance:
-    hostname: discovery
+    prefer-ip-address: true
 
 spring:
   application:

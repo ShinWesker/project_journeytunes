@@ -1,5 +1,6 @@
 eureka:
   client:
+    prefer-ip-address: true
     serviceUrl:
       defaultZone: http://discovery:8761/eureka/
     register-with-eureka: false

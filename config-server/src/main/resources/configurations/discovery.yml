@@ -1,6 +1,6 @@
 eureka:
   instance:
-    hostname: discovery
+    prefer-ip-address: true
   client:
     register-with-eureka: false
     fetch-registry: false
