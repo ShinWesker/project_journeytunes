@@ -1,11 +1,11 @@
 import axios from "axios";
 import router from "@/router";
 
-const axiosSpotifyClient = axios.create({
-  baseURL: 'http://localhost:8222/spotify/api/v1/',
+const axiosClient = axios.create({
+  baseURL: 'http://localhost:8222/',
 });
 
-axiosSpotifyClient.interceptors.request.use((config) => {
+axiosClient.interceptors.request.use((config) => {
   const authToken = localStorage.getItem('authToken');
   if (authToken) {
     config.headers.Authorization = `Bearer ${authToken}`;
@@ -15,7 +15,7 @@ axiosSpotifyClient.interceptors.request.use((config) => {
   return Promise.reject(error);
 });
 
-axiosSpotifyClient.interceptors.response.use(response => {
+axiosClient.interceptors.response.use(response => {
   return response;
 }, error => {
   if (error.response && (error.response.status === 403)) {
@@ -25,4 +25,4 @@ axiosSpotifyClient.interceptors.response.use(response => {
   return Promise.reject(error);
 });
 
-export default axiosSpotifyClient;
+export default axiosClient;

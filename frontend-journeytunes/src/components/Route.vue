@@ -1,16 +1,14 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import L from "leaflet";
-import "leaflet/dist/leaflet.css"; // Assuming Leaflet is installed via npm/yarn
-// If you've installed leaflet-routing-machine via npm/yarn, uncomment the next line
-// import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
-import axiosRoutesClient from "@/clients/axiosRoutesClient";
+import "leaflet/dist/leaflet.css";
+import axiosClient from "@/clients/axiosClient";
 
 const mapContainer = ref(null);
 
 async function createRoute(startLat, startLng, endLat, endLng) {
   try {
-    const response = await axiosRoutesClient.post('/create', {
+    const response = await axiosClient().post('routes/api/v1/create', {
       start: {
         lat: startLat,
         lng: startLng

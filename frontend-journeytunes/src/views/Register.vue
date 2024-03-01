@@ -1,7 +1,7 @@
 <script>
 import { useRouter } from "vue-router";
 import JourneyTunesTitle from "@/components/JourneyTunesTitle.vue";
-import axiosUserClient from "@/clients/axiosUserClient";
+import axiosClient from "@/clients/axiosClient";
 import {useSnackbar} from "@/components/useSnackbar";
 
 export default {
@@ -33,7 +33,7 @@ export default {
       };
 
       try {
-        await axiosUserClient.post('/create', userData);
+        await axiosClient.post('users/api/v1/create', userData);
         this.dialogVisible = true
       } catch (error) {
         useSnackbar().showSnackbar("Username or email already registered!", 2500)

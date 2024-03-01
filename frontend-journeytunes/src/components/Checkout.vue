@@ -82,8 +82,7 @@
 
 <script setup>
 import {ref, onMounted, onUnmounted, watch} from 'vue';
-import axiosHotelClient from "@/clients/axiosHotelClient";
-import axiosTripClient from "@/clients/axiosTripClient";
+import axiosClient from "@/clients/axiosClient";
 import {useRouter} from "vue-router";
 
 const created = ref(false)
@@ -110,7 +109,7 @@ const updatePlaylist = () => {
 
 const fetchHotelById = async (hotelId) => {
   try {
-    const response = await axiosHotelClient.get(`hotel/${hotelId}`);
+    const response = await axiosClient.get(`hotels/api/v1/hotel/${hotelId}`)
     hotel.value = response.data;
   } catch (error) {
     console.error("Error fetching hotel details:", error);
@@ -130,22 +129,16 @@ const handleCustomStorageChange = () => {
 
 function confirmTrip(hotel) {
   const tripData = {
-    startLat: localStorage.getItem('userLongitude'),
-    startLng:  localStorage.getItem('userLatitude'),
-    endLat: hotel.latitude,
-    endLng: hotel.longitude,
+    startLat: parseInt(localStorage.getItem('userLat')),
+    startLng:  parseInt(localStorage.getItem('userLng')),
     hotelId: hotel.id,
-    userId: localStorage.getItem('userId'),
+    userId: parseInt(localStorage.getItem('userId')),
     playlistLink: localStorage.getItem('selectedPlaylist')
   };
 
-  console.log(tripData)
-
-  //TODO send mail to user
-  axiosTripClient.post('/create',tripData)
+  axiosClient.post('trips/api/v1/create',tripData)
     .then(response => {
       created.value = true
-      console.log('Trip created successfully:', response);
       localStorage.removeItem('playlist3_name');
       localStorage.removeItem('hotelId');
       localStorage.removeItem('playlist2_name');

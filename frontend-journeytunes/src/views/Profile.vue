@@ -99,9 +99,7 @@
 
 <script setup>
 import { onMounted, ref } from 'vue';
-import axiosUserClient from "@/clients/axiosUserClient";
-import axiosHotelClient from "@/clients/axiosHotelClient";
-import axiosTripClient from "@/clients/axiosTripClient";
+import axiosClient from "@/clients/axiosClient";
 
 const user = ref({});
 const trips = ref([]);
@@ -114,17 +112,14 @@ onMounted(async () => {
   const authToken = localStorage.getItem('authToken');
   if (authToken) {
     try {
-      const response = await axiosUserClient.post('/get', { token: authToken });
+      const response = await axiosClient.post('users/api/v1/get', { token: authToken });
       user.value = response.data;
-      console.log(user.value);
 
-      const tripsResponse = await axiosTripClient.get('/journeys');
+      const tripsResponse = await axiosClient.get('trips/api/v1/journeys');
       trips.value = tripsResponse.data;
-      console.log(trips.value);
 
-      const hotelsResponse = await axiosHotelClient.get(`owner/${localStorage.getItem('userId')}`);
+      const hotelsResponse = await axiosClient.get(`hotels/api/v1/owner/${localStorage.getItem('userId')}`);
       hotels.value = hotelsResponse.data;
-      console.log(hotels.value);
     } catch (error) {
       console.error(error);
     }

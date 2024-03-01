@@ -81,7 +81,7 @@
 <script setup>
 import {computed, onMounted, ref} from 'vue';
 import store from '@/store';
-import axiosHotelClient from "@/clients/axiosHotelClient.js";
+import axiosClient from "@/clients/axiosClient";
 import HotelDetails from "@/components/HotelDetails.vue";
 import {VRating} from "vuetify/components";
 import {useRouter} from "vue-router";
@@ -97,7 +97,6 @@ const filters = {
   name: '',
 }
 
-
 function requestHotels() {
   store.dispatch('requestHotels', filters);
 }
@@ -109,7 +108,7 @@ function getHotels() {
 async function openModal(hotelId) {
   isModalVisible.value = true;
   try {
-    const response = await axiosHotelClient.get(`hotel/${hotelId}`);
+    const response = await axiosClient.get(`hotels/api/v1/hotel/${hotelId}`);
     selectedHotel.value = response.data;
   } catch (error) {
     console.error('There was an error fetching the hotel details:', error);
@@ -117,15 +116,28 @@ async function openModal(hotelId) {
   }
 }
 
-
 function closeModal() {
   isModalVisible.value = false;
 }
 
-onMounted(() => {
-  getHotels()
-})
+function requestUserLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(position => {
+      const {latitude, longitude} = position.coords;
+      localStorage.setItem('userLat', latitude.toString());
+      localStorage.setItem('userLng', longitude.toString());
+    }, (error) => {
+      console.error('Geolocation permission denied or error occurred:', error);
+    });
+  } else {
+    console.error('Geolocation is not supported by this browser.');
+  }
+}
 
+onMounted(() => {
+  getHotels();
+  requestUserLocation();
+})
 
 const router = useRouter();
 

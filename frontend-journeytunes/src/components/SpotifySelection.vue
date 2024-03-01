@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref } from 'vue'
-import axiosSpotifyClient from "@/clients/axiosSpotifyClient";
+import axiosClient from "@/clients/axiosClient";
 import Playlists from "@/components/Playlists.vue";
 
 const categories = ref([]);
@@ -31,7 +31,7 @@ function moveForward(){
   }
 
 function useSpotifyCategories() {
-  axiosSpotifyClient.get("/categories")
+  axiosClient.get("spotify/api/v1/categories")
     .then(response => {
       categories.value = response.data;
     })

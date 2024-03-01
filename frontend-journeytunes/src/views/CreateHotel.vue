@@ -196,7 +196,7 @@
 <script setup>
 import {computed, ref, watch} from 'vue';
 import { VRating } from 'vuetify/components';
-import axiosHotelClient from "@/clients/axiosHotelClient";
+import axiosClient from "@/clients/axiosClient";
 import router from "@/router";
 
 const hotel = ref({});
@@ -240,7 +240,7 @@ const submitHotel = async () => {
 
   try {
     hotel.value.address = `${hotel.value.street}, ${hotel.value.postalcode} ${hotel.value.city}`
-    const response = await axiosHotelClient.post('/create', hotel.value);
+    const response = await axiosClient.post('hotels/api/v1/create', hotel.value);
     dialogVisible.value = true;
     console.log(response.data);
   } catch (error) {

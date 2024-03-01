@@ -1,5 +1,5 @@
 import { createStore } from 'vuex';
-import axiosHotelClient from '@/clients/axiosHotelClient.js';
+import axiosClient from "@/clients/axiosClient";
 import {ref} from "vue";
 
 
@@ -38,9 +38,8 @@ const actions = {
   },
 
   getHotels({ commit }) {
-    axiosHotelClient.get("/hotels?limit=20").then(({ data }) => {
+    axiosClient.get("hotels/api/v1/hotels?limit=20").then(({ data }) => {
       commit('getHotels', data);
-      console.log(data)
     }).catch(error => console.error("There was an error fetching the hotels:", error));
   },
   requestHotels({ commit }, filters) {
@@ -50,7 +49,7 @@ const actions = {
       stars: filters.stars,
       name: filters.name
     }).toString();
-    axiosHotelClient.get(`search?${queryParams}`)
+    axiosClient.get(`hotels/api/v1/search?${queryParams}`)
       .then(({ data }) => {
         commit('getHotels', data)
       })

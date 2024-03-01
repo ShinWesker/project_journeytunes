@@ -111,7 +111,7 @@ public class HotelController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         for (ResponseHotel hotel : outHotels) {
             hotel.setImageData(null);
-            hotel.setImageLink("http://localhost:8222/hotels/api/v1/hotel/" + hotel.getId() + "/image");
+            hotel.setImageLink("http://localhost:8222/hotels/api/v1/hotels/" + hotel.getId() + "/image");
         }
         return new ResponseEntity<>(outHotels, HttpStatus.OK);
     }

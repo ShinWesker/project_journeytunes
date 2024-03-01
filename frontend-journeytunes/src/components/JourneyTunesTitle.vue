@@ -5,7 +5,6 @@
         JourneyTunes
       </h1>
     </div>
-
   </div>
 </template>
 

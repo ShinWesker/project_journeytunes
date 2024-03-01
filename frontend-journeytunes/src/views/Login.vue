@@ -97,7 +97,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router';
 import store from "@/store";
-import axiosUserClient from "@/clients/axiosUserClient";
+import axiosClient from "@/clients/axiosClient";
 import {useSnackbar} from "@/components/useSnackbar";
 import JourneyTunesTitle from "@/components/JourneyTunesTitle.vue";
 
@@ -128,7 +128,7 @@ async function onSubmit() {
   errorMessage.value = ''
 
   try {
-    const response = await axiosUserClient.post('login', {
+    const response = await axiosClient.post('users/api/v1/login', {
       name: username.value,
       password: password.value
     }, {

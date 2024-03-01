@@ -1,6 +1,6 @@
 <script setup>
 import { ref, inject } from 'vue'
-import axiosSpotifyClient from "@/clients/axiosSpotifyClient";
+import axiosClient from "@/clients/axiosClient";
 const playlistCodes = ref([]);
 const categories = ref(['', '', '']);
 const selectedPlaylistIndex = ref(-1);
@@ -25,7 +25,7 @@ function getPlaylistCode(categoryName, index) {
   if (category) {
     categories.value[index] = category;
     updateCategoryNames()
-    axiosSpotifyClient.get(`/playlist?category=${category}`)
+    axiosClient.get(`spotify/api/v1/playlist?category=${category}`)
       .then(response => {
         const url = Object.keys(response.data)[0];
         const code = url.split('/').pop();

@@ -1,4 +1,3 @@
-// useLocalStorage.js
 import { ref, watchEffect } from 'vue';
 
 export function useLocalStorage(key) {
