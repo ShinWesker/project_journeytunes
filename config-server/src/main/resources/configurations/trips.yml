@@ -1,9 +1,9 @@
 eureka:
   instance:
-    hostname: localhost
+    hostname: discovery
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://discovery:8761/eureka
 
 server:
   port: 8000
@@ -13,7 +13,7 @@ spring:
     name: trips
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/journeytunes_db
+    url: jdbc:mysql://mysql-db:3306/journeytunes_db
     username: root
     password: root
   jpa:

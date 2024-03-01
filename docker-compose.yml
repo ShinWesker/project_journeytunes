@@ -67,6 +67,45 @@ services:
       - mysql-db
       - gateway
 
+  email:
+    build:
+      context: ./email
+      dockerfile: Dockerfile
+    depends_on:
+      - config-server
+      - discovery
+      - mysql-db
+      - gateway
+
+  hotel:
+    build:
+      context: ./hotel
+      dockerfile: Dockerfile
+    depends_on:
+      - config-server
+      - discovery
+      - mysql-db
+      - gateway
+
+  routes:
+    build:
+      context: ./routes
+      dockerfile: Dockerfile
+    depends_on:
+      - config-server
+      - discovery
+      - mysql-db
+      - gateway
+
+  trip:
+    build:
+      context: ./trip
+      dockerfile: Dockerfile
+    depends_on:
+      - config-server
+      - discovery
+      - mysql-db
+      - gateway
 
 volumes:
   mysql-db:
