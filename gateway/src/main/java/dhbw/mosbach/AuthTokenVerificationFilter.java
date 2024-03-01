@@ -26,10 +26,13 @@ public class AuthTokenVerificationFilter implements GlobalFilter {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         String path = exchange.getRequest().getURI().getPath();
 
+        boolean isVerifyPath = path.startsWith("/users/api/v1/verify");
+
         if (path.endsWith("/users/api/v1/login")
                 || path.endsWith("/users/api/v1/create")
                 || path.endsWith("/users/api/v1/token/verify")
-                || IMAGE_URL_PATTERN.matcher(path).matches()) {
+                || IMAGE_URL_PATTERN.matcher(path).matches()
+                || isVerifyPath) {
             return chain.filter(exchange);
         }
 
