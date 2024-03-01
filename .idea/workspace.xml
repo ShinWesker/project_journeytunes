@@ -6,24 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4afe9e2b-85e2-42cb-8a1c-7b59021895c2" name="Changes" comment="setup v1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-journeytunes/src/clients/axiosHotelClient.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-journeytunes/src/clients/axiosRoutesClient.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-journeytunes/src/clients/axiosSpotifyClient.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-journeytunes/src/clients/axiosTripClient.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-journeytunes/src/clients/axiosClient.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-journeytunes/src/clients/axiosUserClient.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-journeytunes/src/components/Checkout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-journeytunes/src/components/Checkout.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-journeytunes/src/components/JourneyTunesTitle.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-journeytunes/src/components/JourneyTunesTitle.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-journeytunes/src/components/Planning.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-journeytunes/src/components/Planning.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-journeytunes/src/components/Playlists.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-journeytunes/src/components/Playlists.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-journeytunes/src/components/Route.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-journeytunes/src/components/Route.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-journeytunes/src/components/SpotifySelection.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-journeytunes/src/components/SpotifySelection.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-journeytunes/src/components/useLocalStorage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-journeytunes/src/components/useLocalStorage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-journeytunes/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-journeytunes/src/store/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-journeytunes/src/views/CreateHotel.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-journeytunes/src/views/CreateHotel.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-journeytunes/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-journeytunes/src/views/Login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-journeytunes/src/views/Profile.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-journeytunes/src/views/Profile.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-journeytunes/src/views/Register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-journeytunes/src/views/Register.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotel/src/main/java/dhbw/mosbach/hotel/controller/HotelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotel/src/main/java/dhbw/mosbach/hotel/controller/HotelController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,12 +33,15 @@
   &quot;associatedIndex&quot;: 2
 }</component>
   <component name="ProjectId" id="2d2b7KfURe4M57RNz4kmMFvWFxG" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
     &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
     &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
@@ -71,14 +56,15 @@
     &quot;Spring Boot.EmailApplication.executor&quot;: &quot;Run&quot;,
     &quot;Spring Boot.GatewayApplication.executor&quot;: &quot;Run&quot;,
     &quot;Spring Boot.HotelApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.RoutesApplication.executor&quot;: &quot;Run&quot;,
     &quot;Spring Boot.SpotifyApplication.executor&quot;: &quot;Run&quot;,
     &quot;Spring Boot.TripApplication.executor&quot;: &quot;Run&quot;,
     &quot;Spring Boot.UserApplication.executor&quot;: &quot;Run&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-21&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;21&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/lucas/IdeaProjects/project_journeytunes&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/lucas/IdeaProjects/project_journeytunes/hotel&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -97,10 +83,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\lucas\IdeaProjects\project_journeytunes\hotel" />
+      <recent name="C:\Users\lucas\IdeaProjects\project_journeytunes\discovery" />
+      <recent name="C:\Users\lucas\IdeaProjects\project_journeytunes\config-server" />
+      <recent name="C:\Users\lucas\IdeaProjects\project_journeytunes\routes\src\main\java\dhbw\mosbach\routes" />
       <recent name="C:\Users\becke\Desktop\project_journeytunes" />
-      <recent name="C:\Users\becke\Desktop\project_journeytunes\spotify\src\main\java\dhbw\mosbach\spotify" />
-      <recent name="C:\Users\becke\Desktop\project_journeytunes\user\src\main\java\dhbw\mosbach\user" />
-      <recent name="C:\Users\becke\Desktop\project_journeytunes\hotel" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\becke\Desktop\project_journeytunes\email\src\main\java\dhbw\mosbach\email" />
@@ -158,6 +145,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="RoutesApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="routes" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="dhbw.mosbach.routes.RoutesApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="SpotifyApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="spotify" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="dhbw.mosbach.spotify.SpotifyApplication" />
@@ -191,6 +185,7 @@
     </configuration>
     <list>
       <item itemvalue="npm.dev" />
+      <item itemvalue="Spring Boot.RoutesApplication" />
       <item itemvalue="Spring Boot.ConfigServerApplication (1)" />
       <item itemvalue="Spring Boot.DiscoveryApplication (1)" />
       <item itemvalue="Spring Boot.EmailApplication" />
@@ -204,6 +199,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
+        <option value="jdk-21.0.1-openjdk-21.0.1-4caba194b151-23eed401" />
         <option value="jdk-21.0.1-openjdk-21.0.1-f644763e9732-f98dd351" />
       </set>
     </attachedChunks>
@@ -224,7 +220,9 @@
       <workItem from="1709252288654" duration="5629000" />
       <workItem from="1709284000263" duration="1041000" />
       <workItem from="1709285063485" duration="8472000" />
-      <workItem from="1709296121084" duration="3407000" />
+      <workItem from="1709296121084" duration="5648000" />
+      <workItem from="1709305965347" duration="6437000" />
+      <workItem from="1709314144829" duration="687000" />
     </task>
     <task id="LOCAL-00001" summary="setup v1">
       <option name="closed" value="true" />
