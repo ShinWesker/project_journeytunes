@@ -2,12 +2,12 @@ package dhbw.mosbach.email.controller;
 
 import dhbw.mosbach.email.modules.Email;
 import dhbw.mosbach.email.subservices.EmailSenderService;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/emails/api/v1")
+@AllArgsConstructor
 public class EmailController {
 
     private EmailSenderService emailSenderService;

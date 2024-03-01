@@ -5,9 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4afe9e2b-85e2-42cb-8a1c-7b59021895c2" name="Changes" comment="setup v1">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/src/test/java/com/alibou/gateway/GatewayApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/config-server/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-server/src/main/java/com/alibou/configserver/ConfigServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/config-server/src/main/java/dhbw/mosbach/ConfigServerApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-server/src/main/resources/configurations/email.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-server/src/main/resources/configurations/email.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-server/src/main/resources/configurations/users.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-server/src/main/resources/configurations/users.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-server/src/test/java/com/alibou/configserver/ConfigServerApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/config-server/src/test/java/dhbw/mosbach/configserver/ConfigServerApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/discovery/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/discovery/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/discovery/src/main/java/com/alibou/discovery/DiscoveryApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/discovery/src/main/java/dhbw/mosbach/DiscoveryApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/discovery/src/test/java/com/alibou/discovery/DiscoveryApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/discovery/src/test/java/dhbw/mosbach/discovery/DiscoveryApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/email/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/email/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/email/src/main/java/dhbw/mosbach/email/controller/EmailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/email/src/main/java/dhbw/mosbach/email/controller/EmailController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/email/src/main/java/dhbw/mosbach/email/subservices/EmailSenderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/email/src/main/java/dhbw/mosbach/email/subservices/EmailSenderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/email/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/email/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotel/src/main/java/dhbw/mosbach/hotel/controller/HotelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotel/src/main/java/dhbw/mosbach/hotel/controller/HotelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/user/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/src/main/java/dhbw/mosbach/user/clients/EmailClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/user/src/main/java/dhbw/mosbach/user/clients/EmailClient.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +61,9 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SONARLINT_PRECOMMIT_ANALYSIS": "true",
+    "Spring Boot.ConfigServerApplication (1).executor": "Run",
     "Spring Boot.ConfigServerApplication.executor": "Run",
+    "Spring Boot.DiscoveryApplication (1).executor": "Run",
     "Spring Boot.DiscoveryApplication.executor": "Run",
     "Spring Boot.EmailApplication.executor": "Run",
     "Spring Boot.GatewayApplication.executor": "Run",
@@ -57,16 +72,17 @@
     "Spring Boot.TripApplication.executor": "Run",
     "Spring Boot.UserApplication.executor": "Run",
     "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "openjdk-21",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/becke/Desktop/project_journeytunes",
+    "last_opened_file_path": "C:/Users/lucas/IdeaProjects/project_journeytunes",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "npm.dev.executor": "Run",
-    "project.structure.last.edited": "Project",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.31340995",
     "run.code.analysis.last.selected.profile": "pProject Default",
@@ -89,6 +105,9 @@
       <recent name="C:\Users\becke\Desktop\project_journeytunes\hotel" />
       <recent name="C:\Users\becke\Desktop\project_journeytunes" />
     </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="dhbw.mosbach" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="configurationTypes">
@@ -101,16 +120,16 @@
     </option>
   </component>
   <component name="RunManager" selected="npm.dev">
-    <configuration name="ConfigServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+    <configuration name="ConfigServerApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="config-server" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.alibou.configserver.ConfigServerApplication" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="dhbw.mosbach.ConfigServerApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DiscoveryApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+    <configuration name="DiscoveryApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="discovery" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.alibou.discovery.DiscoveryApplication" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="dhbw.mosbach.DiscoveryApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -169,8 +188,8 @@
     </configuration>
     <list>
       <item itemvalue="npm.dev" />
-      <item itemvalue="Spring Boot.ConfigServerApplication" />
-      <item itemvalue="Spring Boot.DiscoveryApplication" />
+      <item itemvalue="Spring Boot.ConfigServerApplication (1)" />
+      <item itemvalue="Spring Boot.DiscoveryApplication (1)" />
       <item itemvalue="Spring Boot.EmailApplication" />
       <item itemvalue="Spring Boot.GatewayApplication" />
       <item itemvalue="Spring Boot.HotelApplication" />
@@ -200,6 +219,8 @@
       <workItem from="1709213167549" duration="3560000" />
       <workItem from="1709216749210" duration="20043000" />
       <workItem from="1709252288654" duration="5629000" />
+      <workItem from="1709284000263" duration="1041000" />
+      <workItem from="1709285063485" duration="8472000" />
     </task>
     <task id="LOCAL-00001" summary="setup v1">
       <option name="closed" value="true" />
@@ -218,16 +239,5 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="setup v1" />
     <option name="LAST_COMMIT_MESSAGE" value="setup v1" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/email/src/main/java/dhbw/mosbach/email/controller/EmailController.java</url>
-          <line>18</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

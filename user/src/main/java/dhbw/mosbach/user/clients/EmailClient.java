@@ -5,7 +5,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient("EMAIL")
+@FeignClient("EMAIL/emails/api/v1")
 public interface EmailClient {
     @PostMapping("/send")
     void sendEmail(@RequestBody Email email);

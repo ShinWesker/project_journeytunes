@@ -1,4 +1,4 @@
-package com.alibou.configserver;
+package dhbw.mosbach;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

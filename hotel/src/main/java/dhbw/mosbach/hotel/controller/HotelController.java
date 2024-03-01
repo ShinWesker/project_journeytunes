@@ -86,7 +86,7 @@ public class HotelController {
     public ResponseEntity<ResponseHotel> createHotel(@RequestBody ResponseHotel hotel) {
         ResponseHotel savedHotel = hotelService.saveHotel(hotel);
         if(savedHotel == null){
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
         return new ResponseEntity<>(savedHotel, HttpStatus.CREATED);
     }

@@ -1,4 +1,4 @@
-package com.alibou.configserver;
+package dhbw.mosbach.configserver;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
