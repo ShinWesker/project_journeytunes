@@ -1,5 +1,7 @@
 eureka:
   client:
+    serviceUrl:
+      defaultZone: http://discovery:8761/eureka/
     register-with-eureka: false
 server:
   port: 8222
@@ -23,26 +25,26 @@ spring:
           enabled: true
       routes:
         - id: hotels
-          uri : http://localhost:7000
+          uri : http://hotel:7000
           predicates:
             - Path=/hotels/api/v1/**
         - id: trips
-          uri: http://localhost:8000
+          uri: http://trips:8000
           predicates:
             - Path=/trips/api/v1/**
         - id: users
-          uri: http://localhost:9000
+          uri: http://users:9000
           predicates:
             - Path=/users/api/v1/**
         - id: spotify
-          uri: http://localhost:6000
+          uri: http://spotify:6000
           predicates:
             - Path=/spotify/api/v1/**
         - id: email
-          uri: http://localhost:5000
+          uri: http://email:5000
           predicates:
             - Path=/emails/api/v1/**
         - id: routes
-          uri: http://localhost:4000
+          uri: http://routes:4000
           predicates:
             - Path=/routes/api/v1/**

@@ -118,6 +118,8 @@ onMounted(async () => {
       const tripsResponse = await axiosClient.get('trips/api/v1/journeys');
       trips.value = tripsResponse.data;
 
+      console.log(trips.value)
+
       const hotelsResponse = await axiosClient.get(`hotels/api/v1/owner/${localStorage.getItem('userId')}`);
       hotels.value = hotelsResponse.data;
     } catch (error) {

@@ -1,0 +1,74 @@
+version: '3'
+services:
+  config-server:
+    build:
+      context: ./config-server
+      dockerfile: Dockerfile
+
+  mysql-db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: journeytunes_db
+      MYSQL_USER: journeytunes_user
+      MYSQL_PASSWORD: journeytunes_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-db:/var/lib/mysql
+
+  phpmyadmin-db:
+    image: phpmyadmin:latest
+    links:
+      - mysql-db
+    environment:
+      PMA_HOST: mysql-db
+      PMA_PORT: 3306
+    ports:
+      - "5050:80"
+
+  discovery:
+    build:
+      context: ./discovery
+      dockerfile: Dockerfile
+    depends_on:
+      - config-server
+      - mysql-db
+      - phpmyadmin-db
+    ports:
+      - "8761:8761"
+
+  gateway:
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    depends_on:
+      - discovery
+      - config-server
+      - mysql-db
+      - phpmyadmin-db
+    ports:
+      - "8222:8222"
+
+  spotify:
+    build:
+      context: ./spotify
+      dockerfile: Dockerfile
+    depends_on:
+      - config-server
+      - discovery
+      - gateway
+
+  users:
+    build:
+      context: ./user
+      dockerfile: Dockerfile
+    depends_on:
+      - config-server
+      - discovery
+      - mysql-db
+      - gateway
+
+
+volumes:
+  mysql-db:
