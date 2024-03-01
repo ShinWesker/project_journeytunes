@@ -76,9 +76,8 @@ public class UserController {
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<Object> logout(@RequestHeader("Authorization") String authorization) {
-        String tokenValue = extractTokenValue(authorization);
-        Token token = tokenService.getTokenByValue(tokenValue);
+    public ResponseEntity<Object> logout(@RequestBody RequestToken requestToken) {
+        Token token = tokenService.getTokenByValue(requestToken.getToken());
         if (token == null) {
             return ResponseEntity.notFound().build();
         }
@@ -140,11 +139,7 @@ public class UserController {
         tokenService.saveToken(token);
         return token;
     }
-
-    private String extractTokenValue(String authorizationHeader) {
-        return authorizationHeader.split(" ")[1];
-    }
-
+    
     private String generateVerificationErrorPage() {
         return """
                 <!DOCTYPE html>
