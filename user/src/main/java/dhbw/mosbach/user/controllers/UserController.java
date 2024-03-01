@@ -9,7 +9,6 @@ import dhbw.mosbach.user.requestclasses.*;
 import dhbw.mosbach.user.services.TokenService;
 import dhbw.mosbach.user.services.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -63,7 +62,6 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<Object> login(@RequestBody LoginUser loginUser) {
         User user = userService.getUserByName(loginUser.getName());
-        System.out.println(loginUser);
 
         if (user == null)
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("This user doesn't exist!");
@@ -91,9 +89,7 @@ public class UserController {
 
     @PostMapping("/token/verify")
     public ResponseEntity<Object> verifyToken(@RequestBody RequestToken token) {
-        System.out.println(token);
         boolean tokenExists = tokenService.existsByTokenValue(token.getToken());
-        System.out.println(tokenExists);
         return tokenExists ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 
@@ -109,6 +105,15 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
 
+        return ResponseEntity.ok(new GetUser(user.getId(), user.getName(), user.getEmail()));
+    }
+
+    @PostMapping("/user/{id}")
+    public ResponseEntity<GetUser> getUserById(@PathVariable long id) {
+        User user = userService.getUserById(id);
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok(new GetUser(user.getId(), user.getName(), user.getEmail()));
     }
 
@@ -142,38 +147,38 @@ public class UserController {
 
     private String generateVerificationErrorPage() {
         return """
-                    <!DOCTYPE html>
-                    <html lang="en">
-                    <head>
-                        <meta charset="UTF-8">
-                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                        <title>Email Verification Error</title>
-                        <style>
-                            body {
-                                font-family: Arial, sans-serif;
-                                margin: 0;
-                                padding: 0;
-                                display: flex;
-                                justify-content: center;
-                                align-items: center;
-                                height: 100vh;
-                                background-color: #f4f4f4;
-                            }
-                            .container {
-                                text-align: center;
-                            }
-                            h1 {
-                                color: #d9534f; /* Red color for error message */
-                            }
-                        </style>
-                    </head>
-                    <body>
-                        <div class="container">
-                            <h1>Could not verify your E-Mail</h1>
-                        </div>
-                    </body>
-                    </html>
-                    """;
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Email Verification Error</title>
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif;
+                            margin: 0;
+                            padding: 0;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            height: 100vh;
+                            background-color: #f4f4f4;
+                        }
+                        .container {
+                            text-align: center;
+                        }
+                        h1 {
+                            color: #d9534f; /* Red color for error message */
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="container">
+                        <h1>Could not verify your E-Mail</h1>
+                    </div>
+                </body>
+                </html>
+                """;
     }
 
     private String generateVerificationSuccessPage() {

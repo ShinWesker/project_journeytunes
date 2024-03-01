@@ -14,7 +14,6 @@ public class EmailController {
 
     @PostMapping("/send")
     public void sendEmail(@RequestBody Email email) {
-        System.out.println(email.getBody());
         emailSenderService.sendEmail(email);
     }
 

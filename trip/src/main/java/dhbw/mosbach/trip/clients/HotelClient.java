@@ -5,8 +5,8 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient("HOTELS")
+@FeignClient("HOTELS/hotels/api/v1")
 public interface HotelClient {
-    @GetMapping("/hotels/{id}")
+    @GetMapping("/hotel/{id}")
     Hotel getHotelById(@PathVariable("id") Long id);
 }
