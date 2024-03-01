@@ -158,6 +158,13 @@ function saveHotel() {
 
 function deleteHotel(hotelId) {
   console.log('Delete hotelId:', hotelId);
-  dialog.value = false;
+
+  axiosClient.delete(`hotels/api/v1/delete/${hotelId}`).then(() => {
+    hotels.value = hotels.value.filter(hotel => hotel.id !== hotelId);
+    dialog.value = false;
+  }).catch(error => {
+    console.error('Error deleting hotel:', error);
+  });
 }
+
 </script>
