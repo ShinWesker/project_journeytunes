@@ -32,19 +32,22 @@
               class="w-1/4 p-2"
             >
               <div
-                class="h-24 w-full bg-gray-100 flex items-center justify-center cursor-pointer"
+                class="h-24 w-full flex items-center justify-center cursor-pointer rounded"
+                :style="{ backgroundImage: `url(${trip.hotel.imageLink})`, backgroundSize: 'cover', backgroundPosition: 'center' }"
               >
-              <v-card
-                class="w-full h-full d-flex items-center text-center justify-center cursor-pointer"
-                @click="openTrip(index)"
-              >
-                Trip {{ index + 1 }}
-              </v-card>
+                <v-card
+                  class="w-full h-full d-flex items-center text-center justify-center cursor-pointer"
+                  @click="openTrip(index)"
+                  style="background-color: rgba(0, 0, 0, 0.5); color: white;"
+                >
+                  Trip {{ index + 1 }}
+                </v-card>
               </div>
             </div>
           </div>
         </v-card>
       </div>
+
 
       <!--
   Hotels
@@ -68,26 +71,28 @@
         </v-card>
       </div>
     </v-container>
-    <v-dialog v-model="dialog" width="600px">
-      <v-card>
-        <v-card-title>Edit Hotel</v-card-title>
+
+    <!-- dialogs -->
+    <v-dialog v-model="dialog" class="w-66 h-90">
+      <v-card class="edit-hotel">
+        <v-card-title class="text-indigo">Edit Hotel</v-card-title>
         <v-card-text>
           <v-form>
-            <v-text-field v-model="formHotel.name" label="Hotel Name" outlined dense></v-text-field>
-            <v-text-field v-model="formHotel.description" label="Description" outlined dense></v-text-field>
-            <v-text-field v-model="formHotel.address" label="Address" outlined dense></v-text-field>
-            <v-text-field v-model="formHotel.email" label="Email" outlined dense></v-text-field>
-            <v-text-field v-model="formHotel.phoneNumber" label="Phone number" outlined dense></v-text-field>
-            <v-text-field v-model="formHotel.pricePerNight" label="Price per night" outlined dense></v-text-field>
-            <v-text-field v-model="formHotel.region" label="Region" outlined dense></v-text-field>
-            <v-text-field v-model="formHotel.stars" label="Stars" outlined dense></v-text-field>
+            <v-text-field v-model="formHotel.name" label="Hotel Name" variant="outlined" density="compact"></v-text-field>
+            <v-text-field v-model="formHotel.description" label="Description" variant="outlined" density="compact"></v-text-field>
+            <v-text-field v-model="formHotel.address" label="Address" variant="outlined" density="compact"></v-text-field>
+            <v-text-field v-model="formHotel.email" label="Email" variant="outlined" density="compact"></v-text-field>
+            <v-text-field v-model="formHotel.phoneNumber" label="Phone number" variant="outlined" density="compact"></v-text-field>
+            <v-text-field v-model="formHotel.pricePerNight" label="Price per night" variant="outlined" density="compact"></v-text-field>
+            <v-text-field v-model="formHotel.region" label="Region" variant="outlined" density="compact"></v-text-field>
+            <v-text-field v-model="formHotel.stars" label="Stars" variant="outlined" density="compact"></v-text-field>
 
           </v-form>
         </v-card-text>
         <v-card-actions>
-          <v-btn color="primary" text @click="saveHotel">Save</v-btn>
-          <v-btn color="error" text @click="deleteHotel(selectedHotel.id)">Delete️</v-btn>
-          <v-btn color="grey" text @click="dialog = false">Cancel</v-btn>
+          <v-btn color="indigo"  @click="saveHotel">Save</v-btn>
+          <v-btn color="error"  @click="deleteHotel(selectedHotel.id)">Delete️</v-btn>
+          <v-btn color="grey"  @click="dialog = false">Cancel</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -95,20 +100,21 @@
 
 
   <div>
-    <v-dialog v-model="tripDialog" width="500px">
-      <v-card>
-        <v-card-title class="text-h5">Trip Actions</v-card-title>
+    <v-dialog v-model="tripDialog" class="w-75 h-90">
+      <v-card class="edit-hotel rounded-lg">
+        <v-card-title class="text-h5 font-weight-bold text-indigo text-center">Trip {{ selectedTripId + 1 }}</v-card-title>
         <v-card-text>
-          <Trip>
-
-          </Trip>
+          <Trip :trip-data="selectedTrip"></Trip>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="grey" @click="closeTripDialog">Cancel</v-btn>
+          <v-btn color="indigo" @click="closeTripDialog">Close</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
+
+
+
   </div>
 </template>
 
@@ -130,7 +136,7 @@ const tripDialog = ref(false);
 
 const formHotel = ref({});
 
-
+const selectedTrip = ref(null);
 const selectedTripId = ref(null);
 
 
@@ -154,6 +160,8 @@ onMounted(async () => {
     }
   }
 });
+
+
 
 
 function openHotel(hotelId) {
@@ -195,9 +203,13 @@ function deleteHotel(hotelId) {
 
 
 function openTrip(tripIndex) {
+  console.log('Opening trip with index:', tripIndex);
+  console.log(trips.value)
   selectedTripId.value = tripIndex;
+  selectedTrip.value = trips.value[tripIndex];
   tripDialog.value = true;
 }
+
 
 
 function closeTripDialog() {
@@ -206,4 +218,16 @@ function closeTripDialog() {
 
 
 </script>
+
+<style scoped>
+.v-card-text{
+  color:indigo;
+}
+
+.edit-hotel {
+  border-radius: 2em;
+  border: 5px solid  #943bd2;
+}
+
+</style>
 

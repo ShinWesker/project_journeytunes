@@ -64,7 +64,7 @@ function toggleCategory(category) {
           >
             <v-item>
               <v-card
-                :color="selectedCategories.includes(category) ? 'primary' : ''"
+                :color="selectedCategories.includes(category) ? 'indigo' : ''"
                 class="d-flex align-center justify-center"
                 dark
                 @click.prevent="() => toggleCategory(category)"
