@@ -1,17 +1,13 @@
-# Basisimage
-FROM node:latest
-
-# Arbeitsverzeichnis im Container
+# build stage
+FROM node:lts-alpine as build-stage
 WORKDIR /app
-
-# Kopieren von package.json und package-lock.json
-COPY package.json .
-
-# Abhängigkeiten installieren
-RUN npm install
-
-# Kopieren des Projektinhalts
+COPY package*.json ./
+RUN npm install --production
 COPY . .
-EXPOSE 3000
-# Startbefehl
-CMD ["npm", "run", "dev"]
+RUN npm run build
+
+# production stage
+FROM nginx:stable-alpine as production-stage
+COPY --from=build-stage /app/dist /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

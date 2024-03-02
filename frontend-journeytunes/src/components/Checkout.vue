@@ -37,9 +37,12 @@
         <p class="text-h6">Route & Playlist</p>
       </div>
       <div class="grid sm:grid-cols-1 mx-auto lg:grid-cols-2">
-        <div class="flex justify-center items-center">
-          <h1>Route</h1>
-        </div>
+          <Route
+            :startLat="parseFloat(userLat)"
+            :startLng="parseFloat(userLng)"
+            :endLat="49.142693"
+            :endLng="9.210879"
+          />
         <div class="d-flex flex-col justify-center items-center">
           <iframe
             title="Spotify"
@@ -84,11 +87,16 @@
 import {ref, onMounted, onUnmounted, watch} from 'vue';
 import axiosClient from "@/clients/axiosClient";
 import {useRouter} from "vue-router";
+import Route from "@/components/Route.vue";
 
 const created = ref(false)
 const selectedPlaylist = ref('');
 const hotel = ref({});
 const router = useRouter();
+const userLat = ref(localStorage.getItem('userLat'));
+const userLng = ref(localStorage.getItem('userLng'));
+const hotelLat = ref(localStorage.getItem('hotelLat'));
+const hotelLng = ref(localStorage.getItem('hotelLng'));
 
 const dialogVisible = ref(false);
 
@@ -111,10 +119,17 @@ const fetchHotelById = async (hotelId) => {
   try {
     const response = await axiosClient.get(`hotels/api/v1/hotel/${hotelId}`)
     hotel.value = response.data;
+    console.log(hotel.value)
   } catch (error) {
     console.error("Error fetching hotel details:", error);
   }
 };
+
+watch(hotel, (newHotel) => {
+  if (newHotel && newHotel.latitude && newHotel.longitude) {
+    console.log('Hotel updated, update the route accordingly.');
+  }
+}, { deep: true });
 
 const hotelId = localStorage.getItem('hotelId')
 
@@ -129,8 +144,8 @@ const handleCustomStorageChange = () => {
 
 function confirmTrip(hotel) {
   const tripData = {
-    startLat: parseInt(localStorage.getItem('userLat')),
-    startLng:  parseInt(localStorage.getItem('userLng')),
+    startLat: parseFloat(localStorage.getItem('userLat')),
+    startLng:  parseFloat(localStorage.getItem('userLng')),
     hotelId: hotel.id,
     userId: parseInt(localStorage.getItem('userId')),
     playlistLink: localStorage.getItem('selectedPlaylist')
@@ -154,10 +169,10 @@ function confirmTrip(hotel) {
     });
 }
 
-onMounted(() => {
+onMounted(async () => {
   updatePlaylist();
   const currentHotelId = localStorage.getItem('hotelId');
-  fetchHotelById(currentHotelId);
+  await fetchHotelById(currentHotelId);
   window.addEventListener('localStorageChange', handleCustomStorageChange);
 });
 

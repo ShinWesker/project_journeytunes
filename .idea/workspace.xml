@@ -6,17 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="4afe9e2b-85e2-42cb-8a1c-7b59021895c2" name="Changes" comment="setup v1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-server/src/main/resources/configurations/discovery.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-server/src/main/resources/configurations/discovery.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-server/src/main/resources/configurations/email.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-server/src/main/resources/configurations/email.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-server/src/main/resources/configurations/gateway.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-server/src/main/resources/configurations/gateway.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-server/src/main/resources/configurations/hotels.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-server/src/main/resources/configurations/hotels.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-server/src/main/resources/configurations/routes.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-server/src/main/resources/configurations/routes.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-server/src/main/resources/configurations/spotify.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-server/src/main/resources/configurations/spotify.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-server/src/main/resources/configurations/trips.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-server/src/main/resources/configurations/trips.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-server/src/main/resources/configurations/users.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-server/src/main/resources/configurations/users.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trip/src/main/java/dhbw/mosbach/trip/clients/UserClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/trip/src/main/java/dhbw/mosbach/trip/clients/UserClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/src/main/java/dhbw/mosbach/user/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/user/src/main/java/dhbw/mosbach/user/controllers/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotel/src/main/java/dhbw/mosbach/hotel/HotelApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotel/src/main/java/dhbw/mosbach/hotel/HotelApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotel/src/main/java/dhbw/mosbach/hotel/controller/HotelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotel/src/main/java/dhbw/mosbach/hotel/controller/HotelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotel/src/main/java/dhbw/mosbach/hotel/responseclasses/ResponseHotel.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotel/src/main/java/dhbw/mosbach/hotel/dtos/ResponseHotel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotel/src/main/java/dhbw/mosbach/hotel/services/HotelService.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotel/src/main/java/dhbw/mosbach/hotel/services/HotelService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/src/main/java/dhbw/mosbach/routes/controller/RouteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/routes/src/main/java/dhbw/mosbach/routes/controller/RouteController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -243,6 +237,8 @@
       <workItem from="1709315421710" duration="2371000" />
       <workItem from="1709320019010" duration="3232000" />
       <workItem from="1709324808691" duration="2178000" />
+      <workItem from="1709370442692" duration="894000" />
+      <workItem from="1709374326429" duration="2178000" />
     </task>
     <task id="LOCAL-00001" summary="setup v1">
       <option name="closed" value="true" />

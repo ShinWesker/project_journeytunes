@@ -10,7 +10,7 @@ import dhbw.mosbach.hotel.repositories.ContactDataRepository;
 import dhbw.mosbach.hotel.repositories.HotelRepository;
 import dhbw.mosbach.hotel.repositories.HotelSpecifications;
 import dhbw.mosbach.hotel.repositories.LocationRepository;
-import dhbw.mosbach.hotel.responseclasses.ResponseHotel;
+import dhbw.mosbach.hotel.dtos.ResponseHotel;
 
 import java.util.ArrayList;
 import java.util.List;

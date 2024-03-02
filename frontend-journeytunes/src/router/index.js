@@ -1,9 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import Home from "@/views/Home.vue";
-import Planning from "@/components/Planning.vue";
-import HotelDetails from "@/components/HotelDetails.vue";
-import Playlists from "@/components/Playlists.vue";
-import SpotifySelection from "@/components/SpotifySelection.vue";
 import Login from "@/views/Login.vue";
 import PlanYourTrip from "@/views/PlanYourTrip.vue";
 import {useSnackbar} from "@/components/useSnackbar";

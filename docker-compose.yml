@@ -154,9 +154,8 @@ services:
       context: ./frontend-journeytunes
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
-    volumes:
-      - frontend-vol:/app
+      - "80:80"
+
 
 volumes:
   mysql-db:

@@ -7,13 +7,13 @@ import lombok.Data;
 @AllArgsConstructor
 @Data
 public class CreateTrip {
-    private long startLat;
-    private long startLng;
+    private double startLat;
+    private double startLng;
     private long hotelId;
     private long userId;
     private String playlistLink;
 
-    public Trip createTrip(long endLat, long endLng) {
+    public Trip createTrip(double endLat, double endLng) {
         return new Trip(this.startLat, this.startLng, endLat, endLng, this.hotelId, this.userId, this.playlistLink);
     }
 

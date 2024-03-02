@@ -16,7 +16,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-@CrossOrigin()
 @RestController
 @RequestMapping("/routes/api/v1")
 public class RouteController {
@@ -52,7 +51,7 @@ public class RouteController {
     }
 
     @GetMapping("/coordinates")
-    public ResponseEntity<Object> getCoordinates(@RequestParam("text") String text) {
+    public ResponseEntity<Location> getCoordinates(@RequestParam("text") String text) {
         String url = Configuration.INSTANCE.getApiUrlGeocode() + "?api_key=" + Configuration.INSTANCE.getAccessToken()
                 + "&text=" + URLEncoder.encode(text + " Germany", StandardCharsets.UTF_8);
 
