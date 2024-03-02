@@ -1,4 +1,4 @@
-package dhbw.mosbach.hotel.responseclasses;
+package dhbw.mosbach.hotel.dtos;
 
 
 import lombok.AllArgsConstructor;

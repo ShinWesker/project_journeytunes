@@ -1,13 +1,14 @@
 package dhbw.mosbach.hotel.controller;
 
+import dhbw.mosbach.hotel.clients.RouteClient;
+import dhbw.mosbach.hotel.dtos.Location;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import dhbw.mosbach.hotel.responseclasses.ResponseHotel;
+import dhbw.mosbach.hotel.dtos.ResponseHotel;
 import dhbw.mosbach.hotel.services.HotelService;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class HotelController {
 
     private HotelService hotelService;
+    private RouteClient routeClient;
 
     @GetMapping("/hotels")
     public ResponseEntity<List<ResponseHotel>> getHotels(@RequestParam(name = "limit", defaultValue = "0") int limit) {
@@ -84,6 +86,12 @@ public class HotelController {
 
     @PostMapping("/create")
     public ResponseEntity<ResponseHotel> createHotel(@RequestBody ResponseHotel hotel) {
+        Location location = routeClient.getCoordinates(hotel.getAddress()).getBody();
+        if (location == null){
+            return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
+        }
+        hotel.setLatitude(location.getLat());
+        hotel.setLongitude(location.getLng());
         ResponseHotel savedHotel = hotelService.saveHotel(hotel);
         if(savedHotel == null){
             return new ResponseEntity<>(HttpStatus.CONFLICT);
