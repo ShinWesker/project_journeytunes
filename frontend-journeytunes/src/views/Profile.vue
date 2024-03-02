@@ -33,23 +33,22 @@
             >
               <div
                 class="h-24 w-full bg-gray-100 flex items-center justify-center cursor-pointer"
-                @click="openTrip(trip.id)"
               >
-                <v-card
-                  class="w-full h-full d-flex items-center text-center justify-center"
-                >
-                  Trip {{ index + 1 }}
-                </v-card>
+              <v-card
+                class="w-full h-full d-flex items-center text-center justify-center cursor-pointer"
+                @click="openTrip(index)"
+              >
+                Trip {{ index + 1 }}
+              </v-card>
               </div>
             </div>
           </div>
         </v-card>
       </div>
 
-
       <!--
-      Hotels
-      -->
+  Hotels
+  -->
       <div class="pt-4">
         <v-card>
           <v-card-title>Registered Hotels</v-card-title>
@@ -95,38 +94,67 @@
   </div>
 
 
+  <div>
+    <v-dialog v-model="tripDialog" width="500px">
+      <v-card>
+        <v-card-title class="text-h5">Trip Actions</v-card-title>
+        <v-card-text>
+          <Trip>
+
+          </Trip>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="grey" @click="closeTripDialog">Cancel</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </div>
 </template>
 
+
+
 <script setup>
-import { onMounted, ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import axiosClient from "@/clients/axiosClient";
+import Trip from "@/components/Trip.vue";
+
 
 const user = ref({});
 const trips = ref([]);
-const formHotel = ref({});
 const hotels = ref([]);
+
+
 const dialog = ref(false);
+const tripDialog = ref(false);
+
+const formHotel = ref({});
+
+
+const selectedTripId = ref(null);
 
 
 onMounted(async () => {
   const authToken = localStorage.getItem('authToken');
   if (authToken) {
     try {
-      const response = await axiosClient.post('users/api/v1/get', { token: authToken });
-      user.value = response.data;
+
+      const userResponse = await axiosClient.post('users/api/v1/get', { token: authToken });
+      user.value = userResponse.data;
+
 
       const tripsResponse = await axiosClient.get('trips/api/v1/journeys');
       trips.value = tripsResponse.data;
 
-      console.log(trips.value)
 
       const hotelsResponse = await axiosClient.get(`hotels/api/v1/owner/${localStorage.getItem('userId')}`);
       hotels.value = hotelsResponse.data;
     } catch (error) {
-      console.error(error);
+      console.error('An error occurred:', error);
     }
   }
 });
+
 
 function openHotel(hotelId) {
   const hotel = hotels.value.find(h => h.id === hotelId);
@@ -146,15 +174,13 @@ function openHotel(hotelId) {
   }
 }
 
-function openTrip(tripId) {
-  console.log('Opened trip ID:', tripId);
-}
-
 
 function saveHotel() {
-  console.log('Update hotel:', formHotel.value);
+  console.log('Saving hotel:', formHotel.value);
+
   dialog.value = false;
 }
+
 
 function deleteHotel(hotelId) {
   console.log('Delete hotelId:', hotelId);
@@ -167,4 +193,17 @@ function deleteHotel(hotelId) {
   });
 }
 
+
+function openTrip(tripIndex) {
+  selectedTripId.value = tripIndex;
+  tripDialog.value = true;
+}
+
+
+function closeTripDialog() {
+  tripDialog.value = false;
+}
+
+
 </script>
+
