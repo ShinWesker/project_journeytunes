@@ -118,8 +118,8 @@ async function openModal(hotelId) {
 
 function closeModal() {
   isModalVisible.value = false;
-  localStorage.setItem('hotelLat', selectedHotel.value.longitude);
-  localStorage.setItem('hotelLng', selectedHotel.value.latitude);
+  localStorage.setItem('hotelLat', selectedHotel.value.latitude);
+  localStorage.setItem('hotelLng', selectedHotel.value.longitude);
 }
 
 function requestUserLocation() {

@@ -40,8 +40,8 @@
           <Route
             :startLat="parseFloat(userLat)"
             :startLng="parseFloat(userLng)"
-            :endLat="49.142693"
-            :endLng="9.210879"
+            :endLat="parseFloat(hotelLat)"
+            :endLng="parseFloat(hotelLng)"
           />
         <div class="d-flex flex-col justify-center items-center">
           <iframe
