@@ -16,15 +16,15 @@ public class Trip {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
-    private long startLat;
-    private long startLng;
-    private long endLat;
-    private long endLng;
+    private double startLat;
+    private double startLng;
+    private double endLat;
+    private double endLng;
     private long hotelId;
     private long userId;
     private String playlistLink;
 
-    public Trip(long startLat, long startLng, long endLat, long endLng, long hotelId, long userId, String playlistLink) {
+    public Trip(double startLat, double startLng, double endLat, double endLng, long hotelId, long userId, String playlistLink) {
         this.startLat = startLat;
         this.startLng = startLng;
         this.endLat = endLat;

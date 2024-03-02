@@ -13,8 +13,8 @@ public class ResponseHotel {
     private String description;
     private byte[] imageData;
     private int stars;
-    private long longitude;
-    private long latitude;
+    private double longitude;
+    private double latitude;
     private String address;
     private long phoneNumber;
     private String email;

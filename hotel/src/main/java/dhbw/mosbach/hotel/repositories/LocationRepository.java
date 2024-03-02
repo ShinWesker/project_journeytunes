@@ -5,5 +5,5 @@ import dhbw.mosbach.hotel.models.Location;
 
 public interface LocationRepository extends JpaRepository<Location, Long> {
     boolean existsByLongitudeAndLatitudeAndAddressAndRegion(
-            long longitude, long latitude, String address, String region);
+            double longitude, double latitude, String address, String region);
 }
