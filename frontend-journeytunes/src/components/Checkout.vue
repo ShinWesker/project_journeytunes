@@ -11,6 +11,7 @@
           <img :src="hotel.imageLink" alt="{{ hotel.name }}" class="w-80 h-80 rounded-lg" />
         </div>
         <div class=" flex-col d-flex justify-center text-center">
+          <p class="text-xl-h4 pb-4">{{hotel.name}}</p>
           <p class="text-h5 pb-4"><strong>{{hotel.pricePerNight}} €</strong> night</p>
           <p class="text-h6">Description</p>
           <p class="pb-4">{{hotel.description}}</p>
@@ -36,14 +37,24 @@
       <div>
         <p class="text-h6">Route & Playlist</p>
       </div>
-      <div class="grid sm:grid-cols-1 mx-auto lg:grid-cols-2">
+      <div class="grid sm:grid-cols-1 mx-auto pt-8 lg:grid-cols-2">
+
+        <div class="d-flex flex-col justify-center items-center">
+        <v-card
+          class="w-3/4"
+        >
           <Route
+            class="rounded-b-2"
             :startLat="parseFloat(userLat)"
             :startLng="parseFloat(userLng)"
             :endLat="parseFloat(hotelLat)"
             :endLng="parseFloat(hotelLng)"
           />
-        <div class="d-flex flex-col justify-center items-center">
+        </v-card>
+          </div>
+
+
+        <div class="d-flex flex-col sm:pt-8 justify-center items-center">
           <iframe
             title="Spotify"
             :src="selectedPlaylist"
@@ -125,17 +136,19 @@ const fetchHotelById = async (hotelId) => {
   }
 };
 
-watch(hotel, (newHotel) => {
-  if (newHotel && newHotel.latitude && newHotel.longitude) {
-    console.log('Hotel updated, update the route accordingly.');
-  }
-}, { deep: true });
-
 const hotelId = localStorage.getItem('hotelId')
 
 
+const updateLocations = () => {
+  userLat.value = localStorage.getItem('userLat');
+  userLng.value = localStorage.getItem('userLng');
+  hotelLat.value = localStorage.getItem('hotelLat');
+  hotelLng.value = localStorage.getItem('hotelLng');
+};
+
 const handleCustomStorageChange = () => {
   updatePlaylist();
+  updateLocations();
   const currentHotelId = localStorage.getItem('hotelId');
   if (hotelId !== currentHotelId) {
     fetchHotelById(currentHotelId);

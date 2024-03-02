@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref, watch } from 'vue';
+import { onMounted, ref, watch, reactive } from 'vue';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-routing-machine';
@@ -18,12 +18,10 @@ const props = defineProps({
 
 const mapContainer = ref(null);
 let map = null;
+let markers = [];
+let routingControl = null;
 
 async function fetchRoute(startLat, startLng, endLat, endLng) {
-  console.log(startLat)
-  console.log(startLng)
-  console.log(endLat)
-  console.log(endLng)
   const response = await axiosClient.post('/routes/api/v1/create', {
     start: {
       lat: startLat.toString(),
@@ -34,8 +32,19 @@ async function fetchRoute(startLat, startLng, endLat, endLng) {
       lng: endLng.toString()
     }
   });
-
   return response.data;
+}
+
+function clearMapContents() {
+  // Remove existing markers
+  markers.forEach(marker => map.removeLayer(marker));
+  markers = [];
+
+  // Remove existing routing control
+  if (routingControl) {
+    map.removeControl(routingControl);
+    routingControl = null;
+  }
 }
 
 function createMap(result) {
@@ -43,37 +52,29 @@ function createMap(result) {
     map = L.map(mapContainer.value).setView([result.start.lat, result.start.lng], 10);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
   }
-  let marker1 = L.marker([
-    result.start.lat
-    , result.start.lng
-  ]).addTo(map)
 
-  let marker2 = L.marker([
-    result.end.lat
-    , result.end.lng
-  ]).addTo(map)
+  clearMapContents();
 
-  console.log(result)
+  // Add new markers
+  let marker1 = L.marker([result.start.lat, result.start.lng]).addTo(map);
+  let marker2 = L.marker([result.end.lat, result.end.lng]).addTo(map);
+  markers.push(marker1, marker2);
 
-  L.Routing.control({
+  // Create routing control
+  routingControl = L.Routing.control({
     waypoints: [
       marker1.getLatLng(),
       marker2.getLatLng()
-    ]
-
-    }).addTo(map);
-
-  for (const element of document.getElementsByClassName("leaflet-routing-container")) {
-    element.style = "display: none"
-  }
+    ],
+    show: false // This hides the routing instructions
+  }).addTo(map);
 
   map.fitBounds(L.latLngBounds([
     [result.start.lat, result.start.lng],
     [result.end.lat, result.end.lng]
   ]), {
-    padding: [50, 50]
+    padding: [25, 25]
   });
-
 }
 
 onMounted(async () => {
@@ -99,6 +100,7 @@ watch(() => [props.startLat, props.startLng, props.endLat, props.endLng], async 
   }
 }, { deep: true });
 </script>
+
 
 
 <style scoped>
