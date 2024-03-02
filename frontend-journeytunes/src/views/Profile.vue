@@ -183,9 +183,16 @@ function openHotel(hotelId) {
 }
 
 
-function saveHotel() {
-  console.log('Saving hotel:', formHotel.value);
-  dialog.value = false;
+async function saveHotel() {
+  try {
+    console.log(formHotel)
+    const response = await axiosClient.put("hotels/api/v1/update", formHotel);
+    console.log(response.data);
+    dialog.value = false;
+  } catch (e) {
+    console.error("Error occurred while updating:", e);
+    dialog.value = true;
+  }
 }
 
 
