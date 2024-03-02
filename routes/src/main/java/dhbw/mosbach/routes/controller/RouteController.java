@@ -16,7 +16,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-@CrossOrigin()
 @RestController
 @RequestMapping("/routes/api/v1")
 public class RouteController {
