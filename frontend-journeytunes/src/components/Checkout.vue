@@ -11,7 +11,7 @@
           <img :src="hotel.imageLink" alt="{{ hotel.name }}" class="w-80 h-80 rounded-lg" />
         </div>
         <div class=" flex-col d-flex justify-center text-center">
-          <p class="text-xl-h4 pb-4">{{hotel.name}}</p>
+          <p class="text-3xl font-bold pb-4">{{hotel.name}}</p>
           <p class="text-h5 pb-4"><strong>{{hotel.pricePerNight}} €</strong> night</p>
           <p class="text-h6">Description</p>
           <p class="pb-4">{{hotel.description}}</p>

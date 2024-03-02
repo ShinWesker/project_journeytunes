@@ -91,7 +91,7 @@
         </v-card-text>
         <v-card-actions>
           <v-btn color="indigo"  @click="saveHotel">Save</v-btn>
-          <v-btn color="error"  @click="deleteHotel(selectedHotel.id)">Delete️</v-btn>
+          <v-btn color="error"  @click="deleteHotel(formHotel.id)">Delete️</v-btn>
           <v-btn color="grey"  @click="dialog = false">Cancel</v-btn>
         </v-card-actions>
       </v-card>
@@ -185,13 +185,11 @@ function openHotel(hotelId) {
 
 function saveHotel() {
   console.log('Saving hotel:', formHotel.value);
-
   dialog.value = false;
 }
 
 
 function deleteHotel(hotelId) {
-  console.log('Delete hotelId:', hotelId);
 
   axiosClient.delete(`hotels/api/v1/delete/${hotelId}`).then(() => {
     hotels.value = hotels.value.filter(hotel => hotel.id !== hotelId);
