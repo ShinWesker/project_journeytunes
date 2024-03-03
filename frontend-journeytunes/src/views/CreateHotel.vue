@@ -113,7 +113,7 @@
                           hover
                           color="orange-lighten-1"
                           active-color="orange-lighten-1"
-                          @update:model-value="filters.stars =$event"
+                          @update:model-value="hotel.stars =$event"
                         ></v-rating>
                       </div>
                       <v-text-field

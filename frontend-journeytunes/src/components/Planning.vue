@@ -145,6 +145,8 @@ onMounted(() => {
 
 const router = useRouter();
 
+defineEmits(['selectHotel']);
+
 </script>
 
 <style>

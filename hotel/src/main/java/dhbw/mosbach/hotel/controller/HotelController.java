@@ -24,6 +24,8 @@ public class HotelController {
     private HotelService hotelService;
     private RouteClient routeClient;
     private TripClient tripClient;
+    
+    private static final String IMAGE_LINK = "http://10.50.15.51:8222/hotels/api/v1/hotels/";
 
     @GetMapping("/hotels")
     public ResponseEntity<List<ResponseHotel>> getHotels(@RequestParam(name = "limit", defaultValue = "0") int limit) {
@@ -31,7 +33,7 @@ public class HotelController {
         if (limit == 0) {
             for (ResponseHotel hotel : hotels) {
                 hotel.setImageData(null);
-                hotel.setImageLink("http://10.50.15.51:8222/hotels/api/v1/hotels/" + hotel.getId() + "/image");
+                hotel.setImageLink(IMAGE_LINK + hotel.getId() + "/image");
 
             }
             return ResponseEntity.status(HttpStatus.OK).body(hotels);
@@ -40,7 +42,7 @@ public class HotelController {
             for (int i = 0; i < limit; i++) {
                 ResponseHotel hotel = hotels.get(ThreadLocalRandom.current().nextInt(1, hotels.size()));
                 hotel.setImageData(null);
-                hotel.setImageLink("http://10.50.15.51:8222/hotels/api/v1/hotels/" + hotel.getId() + "/image");
+                hotel.setImageLink(IMAGE_LINK + hotel.getId() + "/image");
                 if (!outHotels.contains(hotel)) {
                     outHotels.add(hotel);
                 } else {
@@ -61,7 +63,7 @@ public class HotelController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         } else {
             hotel.setImageData(null);
-            hotel.setImageLink("http://10.50.15.51:8222/hotels/api/v1/hotels/" + hotel.getId() + "/image");
+            hotel.setImageLink(IMAGE_LINK + hotel.getId() + "/image");
             return ResponseEntity.status(HttpStatus.OK).body(hotel);
 
         }
@@ -79,7 +81,7 @@ public class HotelController {
         } else {
             for (ResponseHotel hotel : hotels) {
                 hotel.setImageData(null);
-                hotel.setImageLink("http://10.50.15.51:8222/hotels/api/v1/hotels/" + hotel.getId() + "/image");
+                hotel.setImageLink(IMAGE_LINK + hotel.getId() + "/image");
             }
             return ResponseEntity.status(HttpStatus.OK).body(hotels);
         }
@@ -121,7 +123,7 @@ public class HotelController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         for (ResponseHotel hotel : outHotels) {
             hotel.setImageData(null);
-            hotel.setImageLink("http://10.50.15.51:8222/hotels/api/v1/hotels/" + hotel.getId() + "/image");
+            hotel.setImageLink(IMAGE_LINK + hotel.getId() + "/image");
         }
         return new ResponseEntity<>(outHotels, HttpStatus.OK);
     }

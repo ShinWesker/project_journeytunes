@@ -3,6 +3,7 @@ import { onMounted, ref } from 'vue'
 import axiosClient from "@/clients/axiosClient";
 import Playlists from "@/components/Playlists.vue";
 
+defineEmits(['selectPlaylist']);
 const categories = ref([]);
 const selectedCategories = ref([]);
 const showPlaylists = ref(false)

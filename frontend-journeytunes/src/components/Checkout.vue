@@ -130,7 +130,6 @@ const fetchHotelById = async (hotelId) => {
   try {
     const response = await axiosClient.get(`hotels/api/v1/hotel/${hotelId}`)
     hotel.value = response.data;
-    console.log(hotel.value)
   } catch (error) {
     console.error("Error fetching hotel details:", error);
   }

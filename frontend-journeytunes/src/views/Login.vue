@@ -20,6 +20,7 @@
                 :rules="[required]"
                 label="Username"
                 class="mb-4"
+                autocomplete="username"
               ></v-text-field>
 
               <v-text-field
@@ -31,6 +32,7 @@
                 label="Password"
                 placeholder="Enter your password"
                 class="mb-4"
+                autocomplete="current-password"
               ></v-text-field>
             </div>
 
