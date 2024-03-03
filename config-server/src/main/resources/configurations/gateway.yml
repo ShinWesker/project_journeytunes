@@ -26,30 +26,53 @@ spring:
           enabled: true
       routes:
         - id: hotels
-          uri : http://hotels:7000
+          uri: http://hotels:7000
           predicates:
             - Path=/hotels/api/v1/**
+        - id: hotelsSwagger
+          uri: http://hotels:7000
+          predicates:
             - Path=/hotel-service/**
         - id: trips
           uri: http://trips:8000
           predicates:
             - Path=/trips/api/v1/**
+        - id: tripSwagger
+          uri: http://trips:8000
+          predicates:
+            - Path=/trip-service/**
         - id: users
           uri: http://users:9000
           predicates:
             - Path=/users/api/v1/**
+        - id: usersSwagger
+          uri: http://users:9000
+          predicates:
+            - Path=/user-service/**
         - id: spotify
           uri: http://spotify:6000
           predicates:
             - Path=/spotify/api/v1/**
+        - id: spotifySwagger
+          uri: http://spotify:6000
+          predicates:
+            - Path=/spotify-service/**
         - id: email
           uri: http://emails:5000
           predicates:
             - Path=/emails/api/v1/**
+        - id: emailSwagger
+          uri: http://emails:5000
+          predicates:
+            - Path=/email-service/**
         - id: routes
           uri: http://routes:4000
           predicates:
             - Path=/routes/api/v1/**
+        - id: routesSwagger
+          uri: http://routes:4000
+          predicates:
+            - Path=/route-service/**
 
 springdoc:
   enable-native-support: true
@@ -66,3 +89,18 @@ springdoc:
       - url: /hotel-service/v3/api-docs
         name: Hotel Service
         primaryName: Hotel Service
+      - url: /trip-service/v3/api-docs
+        name: Trip Service
+        primaryName: Trip Service
+      - url: /user-service/v3/api-docs
+        name: User Service
+        primaryName: User Service
+      - url: /spotify-service/v3/api-docs
+        name: Spotify Service
+        primaryName: Spotify Service
+      - url: /email-service/v3/api-docs
+        name: Email Service
+        primaryName: Email Service
+      - url: /route-service/v3/api-docs
+        name: Route Service
+        primaryName: Route Service
