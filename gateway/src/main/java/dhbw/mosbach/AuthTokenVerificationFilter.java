@@ -32,7 +32,9 @@ public class AuthTokenVerificationFilter implements GlobalFilter {
                 || path.endsWith("/users/api/v1/create")
                 || path.endsWith("/users/api/v1/token/verify")
                 || IMAGE_URL_PATTERN.matcher(path).matches()
-                || isVerifyPath) {
+                || isVerifyPath
+                || path.toLowerCase().contains("api-docs")
+                || path.toLowerCase().contains("swagger")) {
             return chain.filter(exchange);
         }
 

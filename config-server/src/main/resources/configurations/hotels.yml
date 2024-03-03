@@ -20,3 +20,9 @@ spring:
     hibernate:
       ddl-auto: update
     database: mysql
+
+springdoc:
+  api-docs:
+    path: /hotel-service/v3/api-docs #these urls will used to load the swagger ui of this service by the api gateway
+  swagger-ui:
+    path: /hotel-service/swagger-ui.html

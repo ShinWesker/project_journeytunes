@@ -21,8 +21,8 @@ spring:
       ddl-auto: update
     database: mysql
 
-config:
-  HOST_SYSTEM_IP_ADDRESS: localhost
-  EMAIL_SERVICE_PORT: 5870
-  USER_SERVICE_PORT: 8222
-
+springdoc:
+  api-docs:
+    path: /user-service/v3/api-docs #these urls will used to load the swagger ui of this service by the api gateway
+  swagger-ui:
+    path: /user-service/swagger-ui.html

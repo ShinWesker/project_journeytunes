@@ -11,3 +11,8 @@ server:
 spring:
   application:
     name: spotify
+springdoc:
+  api-docs:
+    path: /spotify-service/v3/api-docs #these urls will used to load the swagger ui of this service by the api gateway
+  swagger-ui:
+    path: /spotify-service/swagger-ui.html

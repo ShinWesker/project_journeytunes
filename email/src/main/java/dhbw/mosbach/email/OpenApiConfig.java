@@ -1,4 +1,4 @@
-package dhbw.mosbach.hotel;
+package dhbw.mosbach.email;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -29,8 +29,8 @@ public class OpenApiConfig {
                                                 .bearerFormat("JWT")))
                 .security(List.of(new SecurityRequirement().addList(securitySchemeName)))
                 .info(new Info()
-                        .title("Hotel API")
-                        .description("This is a API to for the hotel endpoint of JourneyTunes.")
+                        .title("Email API")
+                        .description("This is a API to for the email endpoint of JourneyTunes.")
                         .version("1.0.0"));
     }
 }
