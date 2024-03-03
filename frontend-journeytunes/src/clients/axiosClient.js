@@ -2,7 +2,7 @@ import axios from "axios";
 import router from "@/router";
 
 const axiosClient = axios.create({
-  baseURL: 'http://localhost:8222/',
+  baseURL: 'http://10.50.15.51:8222/',
 });
 
 axiosClient.interceptors.request.use((config) => {
