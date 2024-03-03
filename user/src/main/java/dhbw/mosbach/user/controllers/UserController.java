@@ -49,7 +49,7 @@ public class UserController {
 
         String emailBody = """
                 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Verify Email</title></head><body style="font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px;"><div style="max-width: 600px; margin: 0 auto; background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);"><h2 style="color: #333;">Verify!</h2><p style="color: #666;"><a href="http://%s:%s/users/api/v1/verify?id=%d">Click to verify...</a></p><hr style="border: 1px solid #ddd;"><p style="color: #999; font-size: 12px;">Diese E-Mail wurde automatisch generiert. Bitte antworten Sie nicht darauf.</p></div></body></html>
-                """.formatted("localhost", "8222", user.getId());
+                """.formatted("10.50.15.51", "8222", user.getId());
 
         Email email = new Email(user.getEmail(), "Verify Account E-Mail", emailBody);
         try {

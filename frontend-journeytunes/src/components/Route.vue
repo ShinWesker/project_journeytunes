@@ -8,6 +8,7 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-routing-machine';
 import axiosClient from "@/clients/axiosClient";
+import {mdi} from "vuetify/iconsets/mdi";
 
 const props = defineProps({
   startLat: Number,
@@ -20,6 +21,12 @@ const mapContainer = ref(null);
 let map = null;
 let markers = [];
 let routingControl = null;
+
+const customIcon = L.icon({
+  iconUrl: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'1em\' height=\'1em\' viewBox=\'0 0 24 24\'%3E%3Cpath fill=\'%23000\' d=\'M12 11.5A2.5 2.5 0 0 1 9.5 9A2.5 2.5 0 0 1 12 6.5A2.5 2.5 0 0 1 14.5 9a2.5 2.5 0 0 1-2.5 2.5M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7\'/%3E%3C/svg%3E',
+  iconSize: [40, 60],
+  iconAnchor:  [20,48],
+});
 
 async function fetchRoute(startLat, startLng, endLat, endLng) {
   const response = await axiosClient.post('/routes/api/v1/create', {
@@ -40,7 +47,6 @@ function clearMapContents() {
   markers.forEach(marker => map.removeLayer(marker));
   markers = [];
 
-  // Remove existing routing control
   if (routingControl) {
     map.removeControl(routingControl);
     routingControl = null;
@@ -55,18 +61,20 @@ function createMap(result) {
 
   clearMapContents();
 
-  // Add new markers
-  let marker1 = L.marker([result.start.lat, result.start.lng]).addTo(map);
-  let marker2 = L.marker([result.end.lat, result.end.lng]).addTo(map);
+  let marker1 = L.marker([result.start.lat, result.start.lng], { icon: customIcon }).addTo(map);
+  let marker2 = L.marker([result.end.lat, result.end.lng], { icon: customIcon }).addTo(map);
+
   markers.push(marker1, marker2);
 
-  // Create routing control
   routingControl = L.Routing.control({
     waypoints: [
-      marker1.getLatLng(),
-      marker2.getLatLng()
+      L.latLng(result.start.lat, result.start.lng),
+      L.latLng(result.end.lat, result.end.lng)
     ],
-    show: false // This hides the routing instructions
+    createMarker: function(i, waypoint, n) {
+      return L.marker(waypoint.latLng, { icon: customIcon });
+    },
+    show: false
   }).addTo(map);
 
   map.fitBounds(L.latLngBounds([

@@ -40,7 +40,7 @@
                   @click="openTrip(index)"
                   style="background-color: rgba(0, 0, 0, 0.5); color: white;"
                 >
-                  Trip {{ index }}
+                  Trip {{ index + 1}}
                 </v-card>
               </div>
             </div>
