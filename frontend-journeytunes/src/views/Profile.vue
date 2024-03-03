@@ -40,7 +40,7 @@
                   @click="openTrip(index)"
                   style="background-color: rgba(0, 0, 0, 0.5); color: white;"
                 >
-                  Trip {{ index + 1 }}
+                  Trip {{ index }}
                 </v-card>
               </div>
             </div>
@@ -102,7 +102,7 @@
   <div>
     <v-dialog v-model="tripDialog" class="w-75 h-90">
       <v-card class="edit-hotel rounded-lg">
-        <v-card-title class="text-h5 font-weight-bold text-indigo text-center">Trip {{ selectedTripId + 1 }}</v-card-title>
+        <v-card-title class="text-h5 font-weight-bold text-indigo text-center">Trip {{ selectedTripId + 1}}</v-card-title>
         <v-card-text>
           <Trip :trip-data="selectedTrip"></Trip>
         </v-card-text>
@@ -186,7 +186,7 @@ function openHotel(hotelId) {
 async function saveHotel() {
   try {
     console.log(formHotel)
-    const response = await axiosClient.patch("hotels/api/v1/update", formHotel);
+    const response = await axiosClient.patch("hotels/api/v1/update", formHotel.value);
     console.log(response.data);
     dialog.value = false;
   } catch (e) {

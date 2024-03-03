@@ -6,7 +6,6 @@ import dhbw.mosbach.trip.dtos.*;
 import dhbw.mosbach.trip.models.Trip;
 import dhbw.mosbach.trip.services.TripService;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -53,6 +52,11 @@ public class TripController {
             outTrips.add(new FullTrip(hotel, trip.getPlaylistLink(), new Route(trip.getStartLat(), trip.getStartLng(), trip.getEndLat(), trip.getEndLng())));
         }
         return new ResponseEntity<>(outTrips, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/{hotel-id}")
+    public ResponseEntity<String> deleteTripForHotel(@PathVariable("hotel-id") long hotelId) {
+        return new ResponseEntity<>(tripService.deleteTripByHotelId(hotelId), HttpStatus.OK);
     }
 
     private String extractTokenValue(String authorizationHeader) {

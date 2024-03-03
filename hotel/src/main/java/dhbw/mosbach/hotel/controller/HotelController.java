@@ -1,15 +1,16 @@
 package dhbw.mosbach.hotel.controller;
 
 import dhbw.mosbach.hotel.clients.RouteClient;
+import dhbw.mosbach.hotel.clients.TripClient;
 import dhbw.mosbach.hotel.dtos.Location;
+import dhbw.mosbach.hotel.dtos.ResponseHotel;
+import dhbw.mosbach.hotel.services.HotelService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import dhbw.mosbach.hotel.dtos.ResponseHotel;
-import dhbw.mosbach.hotel.services.HotelService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ public class HotelController {
 
     private HotelService hotelService;
     private RouteClient routeClient;
+    private TripClient tripClient;
 
     @GetMapping("/hotels")
     public ResponseEntity<List<ResponseHotel>> getHotels(@RequestParam(name = "limit", defaultValue = "0") int limit) {
@@ -87,13 +89,13 @@ public class HotelController {
     @PostMapping("/create")
     public ResponseEntity<ResponseHotel> createHotel(@RequestBody ResponseHotel hotel) {
         Location location = routeClient.getCoordinates(hotel.getAddress()).getBody();
-        if (location == null){
+        if (location == null) {
             return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
         }
         hotel.setLatitude(location.getLat());
         hotel.setLongitude(location.getLng());
         ResponseHotel savedHotel = hotelService.saveHotel(hotel);
-        if(savedHotel == null){
+        if (savedHotel == null) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
         return new ResponseEntity<>(savedHotel, HttpStatus.CREATED);
@@ -126,15 +128,8 @@ public class HotelController {
 
     @PatchMapping("/update")
     public ResponseEntity<ResponseHotel> updateHotel(@RequestBody ResponseHotel hotel) {
-        System.out.println();
-        System.out.println("-------------------------------------------------");
-        System.out.println("start hotel print");
-        System.out.println(hotel.toString());
-        System.out.println("address: " + hotel.getAddress() + ".");
-        System.out.println("-------------------------------------------------");
-        System.out.println();
         Location location = routeClient.getCoordinates(hotel.getAddress()).getBody();
-        if (location == null){
+        if (location == null) {
             return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
         }
         hotel.setLatitude(location.getLat());
@@ -145,7 +140,12 @@ public class HotelController {
 
     @DeleteMapping("delete/{id}")
     public ResponseEntity<String> deleteHotel(@PathVariable long id) {
-        return new ResponseEntity<>(hotelService.deleteHotel(id), HttpStatus.OK);
+        String response = hotelService.deleteHotel(id);
+        if (response == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        tripClient.deleteTripForHotel(id);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 }

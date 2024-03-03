@@ -79,10 +79,16 @@ public class HotelService {
     }
 
     public String deleteHotel(long id) {
-        hotelRepository.deleteById(id);
-        locationRepository.deleteById(id);
-        contactDataRepository.deleteById(id);
-        return "deleted hotel with id " + id;
+        Hotel hotel = hotelRepository.findById(id).orElse(null);
+        if (hotel != null) {
+
+            hotelRepository.deleteById(id);
+            locationRepository.deleteById(hotel.getLocationId().getId());
+            contactDataRepository.deleteById(hotel.getContactDataId().getId());
+
+            return "deleted hotel with id " + id;
+        }
+        return null;
     }
 
 

@@ -4,6 +4,7 @@ import dhbw.mosbach.trip.models.Trip;
 import dhbw.mosbach.trip.repositories.TripRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
@@ -37,5 +38,9 @@ public class TripService {
         return "Trip with id " + id + " removed!";
     }
 
+    public String deleteTripByHotelId(long id) {
+        repository.deleteAllByHotelId(id);
+        return "deleted all trips for hotel id " + id;
+    }
 
 }
