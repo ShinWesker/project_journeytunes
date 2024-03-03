@@ -130,6 +130,8 @@ function requestUserLocation() {
       localStorage.setItem('userLng', longitude.toString());
     }, (error) => {
       console.error('Geolocation permission denied or error occurred:', error);
+      localStorage.setItem('userLat', "49.354937");
+      localStorage.setItem('userLng', "9.151071");
     });
   } else {
     console.error('Geolocation is not supported by this browser.');
@@ -153,6 +155,7 @@ const router = useRouter();
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 99998;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
@@ -162,6 +165,7 @@ const router = useRouter();
 .modal-content {
   background-color: white;
   width: 70%;
+  z-index: 99999;
   max-height: 75vh;
   overflow-y: auto;
 }
