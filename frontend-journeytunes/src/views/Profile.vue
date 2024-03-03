@@ -186,7 +186,7 @@ function openHotel(hotelId) {
 async function saveHotel() {
   try {
     console.log(formHotel)
-    const response = await axiosClient.put("hotels/api/v1/update", formHotel);
+    const response = await axiosClient.patch("hotels/api/v1/update", formHotel);
     console.log(response.data);
     dialog.value = false;
   } catch (e) {

@@ -3,9 +3,11 @@ package dhbw.mosbach.hotel.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @AllArgsConstructor
+@ToString
 public class ResponseHotel {
     private long id;
     private String name;

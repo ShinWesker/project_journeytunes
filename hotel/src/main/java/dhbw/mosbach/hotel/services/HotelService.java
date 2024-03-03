@@ -1,8 +1,6 @@
 package dhbw.mosbach.hotel.services;
 
-import lombok.AllArgsConstructor;
-import org.springframework.data.jpa.domain.Specification;
-import org.springframework.stereotype.Service;
+import dhbw.mosbach.hotel.dtos.ResponseHotel;
 import dhbw.mosbach.hotel.models.ContactData;
 import dhbw.mosbach.hotel.models.Hotel;
 import dhbw.mosbach.hotel.models.Location;
@@ -10,7 +8,9 @@ import dhbw.mosbach.hotel.repositories.ContactDataRepository;
 import dhbw.mosbach.hotel.repositories.HotelRepository;
 import dhbw.mosbach.hotel.repositories.HotelSpecifications;
 import dhbw.mosbach.hotel.repositories.LocationRepository;
-import dhbw.mosbach.hotel.dtos.ResponseHotel;
+import lombok.AllArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,8 +53,27 @@ public class HotelService {
 
     public ResponseHotel updateHotel(ResponseHotel hotel) {
         Hotel existingHotel = hotelRepository.findById(hotel.getId()).orElse(null);
+
         if (existingHotel != null) {
-            return new ResponseHotel(existingHotel.getId(), hotel.getName(), hotel.getPricePerNight(), hotel.getDescription(), hotel.getImageData(), hotel.getStars(), hotel.getLongitude(), hotel.getLatitude(), hotel.getAddress(), hotel.getPhoneNumber(), hotel.getEmail(), hotel.getRegion(), hotel.getImageLink(), hotel.getCreator());
+            Location existingLocation = locationRepository.findById(existingHotel.getLocationId().getId()).orElse(null);
+            ContactData existingContactData = contactDataRepository.findById(existingHotel.getContactDataId().getId()).orElse(null);
+            if (existingLocation != null && existingContactData != null) {
+                existingHotel.setName(hotel.getName());
+                existingHotel.setDescription(hotel.getDescription());
+                existingHotel.setStars(hotel.getStars());
+                existingHotel.setPricePerNight(hotel.getPricePerNight());
+                existingLocation.setAddress(hotel.getAddress());
+                existingLocation.setRegion(hotel.getRegion());
+                existingLocation.setLongitude(hotel.getLongitude());
+                existingLocation.setLatitude(hotel.getLatitude());
+                existingContactData.setEmail(hotel.getEmail());
+                existingContactData.setPhoneNumber(hotel.getPhoneNumber());
+                hotelRepository.save(existingHotel);
+                locationRepository.save(existingLocation);
+                contactDataRepository.save(existingContactData);
+                return new ResponseHotel(existingHotel.getId(), hotel.getName(), hotel.getPricePerNight(), hotel.getDescription(), hotel.getImageData(), hotel.getStars(), hotel.getLongitude(), hotel.getLatitude(), hotel.getAddress(), hotel.getPhoneNumber(), hotel.getEmail(), hotel.getRegion(), hotel.getImageLink(), hotel.getCreator());
+
+            }
         }
         return null;
     }

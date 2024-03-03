@@ -126,8 +126,21 @@ public class HotelController {
 
     @PatchMapping("/update")
     public ResponseEntity<ResponseHotel> updateHotel(@RequestBody ResponseHotel hotel) {
+        System.out.println();
+        System.out.println("-------------------------------------------------");
+        System.out.println("start hotel print");
+        System.out.println(hotel.toString());
+        System.out.println("address: " + hotel.getAddress() + ".");
+        System.out.println("-------------------------------------------------");
+        System.out.println();
+        Location location = routeClient.getCoordinates(hotel.getAddress()).getBody();
+        if (location == null){
+            return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
+        }
+        hotel.setLatitude(location.getLat());
+        hotel.setLongitude(location.getLng());
         ResponseHotel updatedHotel = hotelService.updateHotel(hotel);
-        return new ResponseEntity<>(updatedHotel, HttpStatus.CREATED);
+        return new ResponseEntity<>(updatedHotel, HttpStatus.OK);
     }
 
     @DeleteMapping("delete/{id}")
