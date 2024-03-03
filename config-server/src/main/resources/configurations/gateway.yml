@@ -29,6 +29,7 @@ spring:
           uri : http://hotels:7000
           predicates:
             - Path=/hotels/api/v1/**
+            - Path=/hotel-service/**
         - id: trips
           uri: http://trips:8000
           predicates:
@@ -49,3 +50,19 @@ spring:
           uri: http://routes:4000
           predicates:
             - Path=/routes/api/v1/**
+
+springdoc:
+  enable-native-support: true
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    config-url: /v3/api-docs/swagger-config
+    urls:
+      - url: /v3/api-docs
+        name: API Gateway Service
+        primaryName: API Gateway Service
+      - url: /hotel-service/v3/api-docs
+        name: Hotel Service
+        primaryName: Hotel Service

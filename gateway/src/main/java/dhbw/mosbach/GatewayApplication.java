@@ -10,7 +10,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 @SpringBootApplication
 @OpenAPIDefinition(info = @Info(title = "JourneyTunes API Gateway", version = "1.0", description = "Documentation API Gateway v1.0"))
-
 public class GatewayApplication {
 
 	public static void main(String[] args) {
