@@ -18,7 +18,7 @@
                         v-model="hotel.name"
                         label="Hotel Name"
                         :readonly="loading"
-                        :rules="[required]"
+                        :rules="formRules.name"
                         variant="outlined"
                         density="compact"
                       ></v-text-field>
@@ -29,7 +29,7 @@
                         v-model="hotel.email"
                         label="Hotel Email"
                         :readonly="loading"
-                        :rules="[required]"
+                        :rules="formRules.email"
                         placeholder="mail@hotel.com"
                         variant="outlined"
                         density="compact"
@@ -39,7 +39,7 @@
                         v-model="hotel.phoneNumber"
                         label="Phone Number"
                         :readonly="loading"
-                        :rules="[required, integerRule]"
+                        :rules="formRules.phoneNumber"
                         variant="outlined"
                         density="compact"
                       ></v-text-field>
@@ -52,7 +52,7 @@
                               v-model="hotel.street"
                               label="Street"
                               :readonly="loading"
-                              :rules="[required]"
+                              :rules="formRules.street"
                               variant="outlined"
                               density="compact"
                             ></v-text-field>
@@ -62,7 +62,7 @@
                               v-model="hotel.city"
                               label="City"
                               :readonly="loading"
-                              :rules="[required]"
+                              :rules="formRules.city"
                               variant="outlined"
                               density="compact"
                             ></v-text-field>
@@ -72,7 +72,7 @@
                               v-model="hotel.postalcode"
                               label="Postal Code"
                               :readonly="loading"
-                              :rules="[required, integerRule]"
+                              :rules="formRules.postalCode"
                               variant="outlined"
                               density="compact"
                             ></v-text-field>
@@ -86,6 +86,7 @@
                               label="Region"
                               variant="outlined"
                               density="compact"
+                              :rules="formRules.region"
                               :items="['Baden-Württemberg', 'Bayern', 'Berlin', 'Brandenburg', 'Bremen', 'Hamburg', 'Hessen', 'Mecklenburg-Vorpommern', 'Niedersachsen', 'Nordrhein-Westfalen', 'Rheinland-Pfalz', 'Saarland', 'Sachsen', 'Sachsen-Anhalt', 'Schleswig-Holstein', 'Thüringen']"
                               @update:search="hotel.region = $event"
                             ></v-combobox>
@@ -101,7 +102,7 @@
                         v-model="hotel.description"
                         label="Description"
                         :readonly="loading"
-                        :rules="[required]"
+                        :rules="formRules.description"
                         variant="outlined"
                         density="compact">
                       </v-text-field>
@@ -121,7 +122,7 @@
                         label="Price per Night"
                         prefix="€"
                         :readonly="loading"
-                        :rules="[required, integerRule]"
+                        :rules="formRules.pricePerNight"
                         variant="outlined"
                         density="compact"
                       ></v-text-field>
@@ -145,7 +146,7 @@
                     </v-col>
                   </v-row>
 
-                  <v-btn type="submit" @click="submitHotel" block color="indigo" class="mt-4">Submit</v-btn>
+                  <v-btn type="submit" @click="submitHotel" :disabled="!form" block color="indigo" class="mt-4">Submit</v-btn>
                 </v-form>
               </v-card-text>
             </div>
@@ -198,19 +199,50 @@ import {computed, ref, watch} from 'vue';
 import { VRating } from 'vuetify/components';
 import axiosClient from "@/clients/axiosClient";
 import router from "@/router";
+import {useSnackbar} from "@/components/useSnackbar";
 
 const hotel = ref({});
 const form = ref(false);
 const loading = ref(false);
 const hotelImage = ref(null);
 const dialogVisible = ref(false);
-
-const required = (v) => !!v || 'Field is required';
-const integerRule = (v) => (!v || !/^\d+$/.test(v)) ? 'Field input must be digits' : true;
+const { showSnackbar } = useSnackbar();
 
 const imagePreview = computed(() => {
   return hotelImage.value ? `data:image/png;base64,${hotel.value.imageData}` : null;
 });
+
+
+const formRules = {
+  name: [v => !!v || 'Hotel name is required'],
+  city: [v => !!v || 'City is required'],
+  street: [v => !!v || 'Street is required'],
+  description: [v => !!v || 'Description is required'],
+  address: [v => !!v || 'Address is required'],
+  email: [v => !!v || 'Email is required', v => /.+@.+\..+/.test(v) || 'E-mail must be valid'],
+  phoneNumber: [
+    v => !!v || 'Phone number is required',
+    v => /^\d+$/.test(v) || 'Phone number must be numeric'
+  ],
+  postalCode: [
+    v => !!v || 'Postalcode is required',
+    v => /^\d+$/.test(v) || 'Postalcode must be numeric'
+  ],
+  pricePerNight: [
+    v => !!v || 'Price per Night is required',
+    v => /^\d+$/.test(v) || 'Price per Night must be numeric'
+  ],
+  region: [v => !!v || 'Region is required'],
+  stars: [
+    v => !!v || 'Stars are required',
+    v => v >= 1 || 'The minimum number of stars is 1',
+    v => v <= 5 || 'The maximum number of stars is 5',
+    v => !isNaN(parseFloat(v)) && isFinite(v) || 'The value must be a number'
+  ]
+};
+
+
+
 
 watch(hotelImage, (newVal, oldVal) => {
   if (newVal && newVal.length > 0) {
@@ -232,6 +264,7 @@ const createBase64Image = (file) => {
 };
 
 
+
 const submitHotel = async () => {
   if (!form.value) return;
 
@@ -244,6 +277,7 @@ const submitHotel = async () => {
     dialogVisible.value = true;
     console.log(response.data);
   } catch (error) {
+    showSnackbar("A field is filled incorrectly", 4000)
     console.error(error);
   } finally {
     loading.value = false;

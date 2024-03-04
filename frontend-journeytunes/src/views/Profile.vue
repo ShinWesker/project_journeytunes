@@ -78,20 +78,28 @@
         <v-card class="edit-hotel">
           <v-card-title class="text-indigo">Edit Hotel</v-card-title>
           <v-card-text>
-            <v-form>
-              <v-text-field v-model="formHotel.name" label="Hotel Name" variant="outlined" density="compact"></v-text-field>
-              <v-text-field v-model="formHotel.description" label="Description" variant="outlined" density="compact"></v-text-field>
-              <v-text-field v-model="formHotel.address" label="Address" variant="outlined" density="compact"></v-text-field>
-              <v-text-field v-model="formHotel.email" label="Email" variant="outlined" density="compact"></v-text-field>
-              <v-text-field v-model="formHotel.phoneNumber" label="Phone number" variant="outlined" density="compact"></v-text-field>
-              <v-text-field v-model="formHotel.pricePerNight" label="Price per night" variant="outlined" density="compact"></v-text-field>
-              <v-text-field v-model="formHotel.region" label="Region" variant="outlined" density="compact"></v-text-field>
-              <v-text-field v-model="formHotel.stars" label="Stars" variant="outlined" density="compact"></v-text-field>
+            <v-form v-model="valid" ref="form">
+              <v-text-field v-model="formHotel.name" :rules="formRules.name" label="Hotel Name" variant="outlined" density="compact"></v-text-field>
+              <v-text-field v-model="formHotel.description" :rules="formRules.description" label="Description" variant="outlined" density="compact"></v-text-field>
+              <v-text-field v-model="formHotel.address" :rules="formRules.address" label="Address" variant="outlined" density="compact"></v-text-field>
+              <v-text-field v-model="formHotel.email" :rules="formRules.email" label="Email" variant="outlined" density="compact"></v-text-field>
+              <v-text-field v-model="formHotel.phoneNumber" :rules="formRules.phoneNumber" label="Phone number" variant="outlined" density="compact"></v-text-field>
+              <v-text-field v-model="formHotel.pricePerNight" :rules="formRules.pricePerNight" label="Price per night" variant="outlined" density="compact"></v-text-field>
+              <v-combobox
+                label="Region"
+                variant="outlined"
+                v-model="formHotel.region"
+                :rules="formRules.region"
+                density="compact"
+                :items="['Baden-Württemberg', 'Bayern', 'Berlin', 'Brandenburg', 'Bremen', 'Hamburg', 'Hessen', 'Mecklenburg-Vorpommern', 'Niedersachsen', 'Nordrhein-Westfalen', 'Rheinland-Pfalz', 'Saarland', 'Sachsen', 'Sachsen-Anhalt', 'Schleswig-Holstein', 'Thüringen']"
+                @update:search="formHotel.region = $event"
+              ></v-combobox>
+              <v-text-field v-model="formHotel.stars" :rules="formRules.stars" label="Stars" variant="outlined" density="compact"></v-text-field>
 
             </v-form>
           </v-card-text>
           <v-card-actions>
-            <v-btn color="indigo"  @click="saveHotel">Save</v-btn>
+            <v-btn color="indigo" @click="saveHotel" :disabled="!valid">Save</v-btn>
             <v-btn color="error"  @click="deleteHotel(formHotel.id)">Delete️</v-btn>
             <v-btn color="grey"  @click="dialog = false">Cancel</v-btn>
           </v-card-actions>
@@ -141,6 +149,28 @@ const formHotel = ref({});
 const selectedTrip = ref(null);
 const selectedTripId = ref(null);
 
+const valid = ref(false);
+
+const formRules = {
+  name: [v => !!v || 'Hotel Name is required'],
+  description: [v => !!v || 'Description is required'],
+  address: [v => !!v || 'Address is required'],
+  email: [v => !!v || 'Email is required', v => /.+@.+\..+/.test(v) || 'E-mail must be valid'],
+  phoneNumber: [
+    v => !!v || 'Phone number is required',
+    v => /^\d+$/.test(v) || 'Phone number must be numeric'
+  ],
+  pricePerNight: [v => !!v || 'Price per night is required'],
+  region: [v => !!v || 'Region is required'],
+  stars: [
+    v => !!v || 'Stars are required',
+    v => v >= 1 || 'The minimum number of stars is 1',
+    v => v <= 5 || 'The maximum number of stars is 5',
+    v => !isNaN(parseFloat(v)) && isFinite(v) || 'The value must be a number'
+  ]
+};
+
+
 
 onMounted(async () => {
   const authToken = localStorage.getItem('authToken');
@@ -183,6 +213,7 @@ function openHotel(hotelId) {
     dialog.value = true;
   }
 }
+
 
 
 async function saveHotel() {
