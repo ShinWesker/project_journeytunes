@@ -3,6 +3,7 @@ import axiosClient from "@/clients/axiosClient";
 import {ref} from "vue";
 
 
+
 const states = {
   searchedHotels: [],
   requestHotels: []
@@ -33,6 +34,18 @@ const actions = {
     commit('setLoggedIn', true);
   },
   logOut({ commit }) {
+    const authToken = localStorage.getItem("authToken");
+    console.log(authToken);
+
+    axiosClient.post("users/api/v1/logout", {}, {
+      headers: {
+        'Authorization': `Bearer ${authToken}`
+      }
+    }).then(response => {
+      console.log("Logged out successfully.");
+    }).catch(error => {
+      console.error("Logout error:", error);
+    });
     localStorage.clear();
     commit('setLoggedIn', false);
   },
