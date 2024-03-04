@@ -25,18 +25,6 @@ public class UserController {
     private final TokenService tokenService;
     private final EmailClient emailClient;
 
-
-    @GetMapping("/users/{id}")
-    public ResponseEntity<GetUser> getUser(@PathVariable Long id) {
-        User user = userService.getUserById(id);
-        if (user == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        GetUser getUser = new GetUser(user.getId(), user.getName(), user.getEmail());
-        return ResponseEntity.ok(getUser);
-    }
-
     @PostMapping("/create")
     public ResponseEntity<Object> createUser(@RequestBody CreateUser createUser) {
         User user;
