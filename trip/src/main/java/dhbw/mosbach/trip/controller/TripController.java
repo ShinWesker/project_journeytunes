@@ -22,30 +22,30 @@ public class TripController {
     private HotelClient hotelClient;
 
     @PostMapping("/create")
-    public ResponseEntity<Object> createTrip(@RequestBody CreateTrip reqTrip) {
+    public ResponseEntity<Trip> createTrip(@RequestBody CreateTrip reqTrip) {
 
         User user = userClient.getUserById(reqTrip.getUserId()).getBody();
         if (user == null)
-            return new ResponseEntity<>("User could not be found!", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
         Hotel hotel = hotelClient.getHotelById(reqTrip.getHotelId());
         if (hotel == null)
-            return new ResponseEntity<>("Hotel could not be found!", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         Trip trip = reqTrip.createTrip(hotel.getLatitude(), hotel.getLongitude());
         tripService.saveTrip(trip);
         return new ResponseEntity<>(trip, HttpStatus.CREATED);
     }
 
     @GetMapping("/journeys")
-    public ResponseEntity<Object> getTrip(@RequestHeader("Authorization") String authorization) {
+    public ResponseEntity<List<FullTrip>> getTrip(@RequestHeader("Authorization") String authorization) {
         String tokenValue = extractTokenValue(authorization);
         User user = userClient.getUser(new RequestToken(tokenValue)).getBody();
         if (user == null)
-            return new ResponseEntity<>("User could not be found!", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
         List<Trip> trips = tripService.findByUserId(user.getId());
         if (trips == null)
-            return new ResponseEntity<>("No Trips for this user registered!", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         List<FullTrip> outTrips = new ArrayList<>();
         for (Trip trip : trips) {
             Hotel hotel = hotelClient.getHotelById(trip.getHotelId());

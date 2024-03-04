@@ -26,13 +26,13 @@ public class UserController {
     private final EmailClient emailClient;
 
     @PostMapping("/create")
-    public ResponseEntity<Object> createUser(@RequestBody CreateUser createUser) {
+    public ResponseEntity<GetUser> createUser(@RequestBody CreateUser createUser) {
         User user;
 
         if (userService.getUserByName(createUser.getName()) == null) {
             user = userService.saveUser(createUser.createUser());
         } else {
-            return new ResponseEntity<>("Error: This username is taken!", HttpStatus.CONFLICT);
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
 
         String emailBody = """
@@ -45,19 +45,19 @@ public class UserController {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(new GetUser(user.getId(), user.getName(), user.getEmail()), HttpStatus.CREATED);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Object> login(@RequestBody LoginUser loginUser) {
+    public ResponseEntity<Token> login(@RequestBody LoginUser loginUser) {
         User user = userService.getUserByName(loginUser.getName());
 
         if (user == null)
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("This user doesn't exist!");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         if (!user.isVerified())
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You have to verify your E-Mail first!");
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         if (!isPasswordCorrect(loginUser.getPassword(), user.getPassword()))
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Password is incorrect!");
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
 
         Token token = createUniqueTokenForUser(user);
 
@@ -83,7 +83,7 @@ public class UserController {
     }
 
     @PostMapping("/get")
-    public ResponseEntity<Object> getUser(@RequestBody RequestToken reqToken) {
+    public ResponseEntity<GetUser> getUser(@RequestBody RequestToken reqToken) {
         Token token = tokenService.getTokenByValue(reqToken.getToken());
         if (token == null) {
             return ResponseEntity.notFound().build();

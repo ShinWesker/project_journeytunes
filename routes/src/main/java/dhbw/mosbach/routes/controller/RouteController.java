@@ -21,7 +21,7 @@ import java.util.List;
 public class RouteController {
 
     @PostMapping("/create")
-    public ResponseEntity<Object> createRoute(@RequestBody RouteRequest request) {
+    public ResponseEntity<Route> createRoute(@RequestBody RouteRequest request) {
 
 
         Route route = new Route(request.getStart(), request.getEnd());
